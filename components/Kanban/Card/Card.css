@@ -45,7 +45,8 @@
 .card__footer {
   margin-top: 8px;
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
 }
 .card__footer > div > svg {
   height: 15px;
@@ -65,3 +66,15 @@
   margin-inline: 2px;
   font-weight: 500;
 }
+
+.date__footer{
+  margin: 0 -5px;
+  font-size: 0.75rem;
+  color: rgb(125, 119, 126);
+  font-weight: 600;
+}
+
+.cardfooter__date span{
+  padding-top: 6px;
+}
+
