@@ -9,11 +9,10 @@ import Editable from "./Editable/Editable";
 import useLocalStorage from "use-local-storage";
 import "../../bootstrap.css";
 
-function Kanban() {
+function Kanban({ sessionKey }) {
+  const sessionDataKey = `kanban-board-${sessionKey}`;
   const [data, setData] = useState(
-    localStorage.getItem("kanban-board")
-      ? JSON.parse(localStorage.getItem("kanban-board"))
-      : []
+    localStorage.getItem(sessionDataKey) ? JSON.parse(localStorage.getItem(sessionDataKey)) : []
   );
 
   const defaultDark = window.matchMedia(
@@ -126,15 +125,15 @@ function Kanban() {
     console.log(tempBoards);
     setData(tempBoards);
   };
-
+ 
   useEffect(() => {
-    localStorage.setItem("kanban-board", JSON.stringify(data));
+    localStorage.setItem(sessionDataKey, JSON.stringify(data));
   }, [data]);
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div className="App" data-theme={theme}>
-        <Navbar switchTheme={switchTheme} />
+        <Navbar switchTheme={switchTheme} resetData={() => setData([])}/>
         <div className="app_outer">
           <div className="app_boards">
             {data.map((item) => (
@@ -157,6 +156,7 @@ function Kanban() {
               onSubmit={addBoard}
               placeholder={"Enter Board  Title"}
             />
+            
           </div>
         </div>
       </div>
