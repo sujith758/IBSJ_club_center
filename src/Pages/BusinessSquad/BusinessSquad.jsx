@@ -1,13 +1,11 @@
 import React from 'react'
-import Kanban from '../../../components/Kanban/Kanban';
-import { SessionProvider } from '../../../components/SessionContext';
+
+import NavbarBS from './NavbarBS';
 
 const BusinessSquad = () => {
   return (
     <div>
-      <SessionProvider>
-        <Kanban sessionKey="BusinessSquad" />
-      </SessionProvider>
+      <NavbarBS />
     </div>
   )
 }

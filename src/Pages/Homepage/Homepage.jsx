@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import NavbarHP from "./Navbar/NavbarHP";
+import ecobizlogo from "../../Assets/EcoBiz.png"
 
 const Homepage = () => {
   return (
@@ -9,7 +10,7 @@ const Homepage = () => {
       <ul className="homepage">
         <li>
           <Link className="link_text" to="/businesssquad">
-            <img src="../../Assets/EcoBiz.png" alt="ecobiz logo" />
+            <img src={ecobizlogo} alt="ecobiz logo" />
           
           </Link>
         </li>

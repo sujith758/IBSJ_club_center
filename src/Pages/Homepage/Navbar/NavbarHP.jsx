@@ -7,10 +7,14 @@ const NavbarHP = () => {
       <div className="navbar_image"></div>
       <div className="navbar_content">
         <ul>
-          <li>Home</li>
           <li>
             <Link className="navbar_link" to="/aboutus">
               About Us
+            </Link>
+          </li>
+          <li>
+            <Link className="navbar_link" to="/gallery">
+              Gallery
             </Link>
           </li>
           <li>
