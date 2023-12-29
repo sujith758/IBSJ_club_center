@@ -1,8 +1,11 @@
 import React from 'react'
+import NavbarPix from './NavbarPix';
 
 const Pixels = () => {
   return (
-    <div>Pixels</div>
+    <div>
+      <NavbarPix />
+    </div>
   )
 }
 

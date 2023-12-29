@@ -25,6 +25,11 @@ const Homepage = () => {
           </Link>
         </li>
         <li>
+          <Link className="link_text" to="/ecobiz">
+            EcoBiz
+          </Link>
+        </li>
+        <li>
           <Link className="link_text" to="/graffiti">
             Graffiti
           </Link>
@@ -65,7 +70,7 @@ const Homepage = () => {
           </Link>
         </li>
         <li>
-          <Link className="link_text" to="/synchnorize">
+          <Link className="link_text" to="/synchronize">
             Synchronize
           </Link>
         </li>

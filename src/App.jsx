@@ -1,12 +1,12 @@
 import React from "react";
 import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import { useState, useEffect } from "react";
-
 import Homepage from "./Pages/Homepage/Homepage";
 import DeansCorner from "./Pages/DeansCorner/DeansCorner";
 import BusinessSquad from "./Pages/BusinessSquad/BusinessSquad";
 import Cognizance from "./Pages/Cognizance/Cognizance";
 import Communiqa from "./Pages/Communiqa/Communiqa";
+import EcoBiz from "./Pages/EcoBiz/EcoBiz";
 import Graffiti from "./Pages/Graffiti/Graffiti"; 
 import IgnitedMinds from "./Pages/IgnitedMinds/IgnitedMinds";
 import KhelRatna from "./Pages/KhelRatna/KhelRatna";
@@ -22,6 +22,21 @@ import Kanban from "../components/Kanban/Kanban";
 import AboutUs from "./Pages/Homepage/AboutUs/AboutUs";
 import Gallery from "./Pages/Homepage/Gallery/Gallery";
 import KanbanCombined from "./Pages/DeansCorner/KanbanCombined/KanbanCombined";
+import KanbanBS from "./Pages/BusinessSquad/KanbanBS";
+import KanbanCog from "./Pages/Cognizance/KanbanCog";
+import KanbanComm from "./Pages/Communiqa/KanbanComm";
+import KanbanEB from "./Pages/EcoBiz/KanbanEB"
+import KanbanG from "./Pages/Graffiti/KanbanG";
+import KanbanIG from "./Pages/IgnitedMinds/KanbanIG"
+import KanbanKR from "./Pages/KhelRatna/KanbanKR";
+import KanbanMar from "./Pages/MarketMavens/KanbanMar";
+import KanbanMon from "./Pages/MoneyMatrix/KanbanMon";
+import KanbanN from "./Pages/Navrang/KanbanN";
+import KanbanPix from "./Pages/Pixels/KanbanPix";
+import KanbanPra from "./Pages/Prayaas/KanbanPra";
+import KanbanSync from "./Pages/Synchronize/KanbanSync";
+import KanbanTechno from "./Pages/Techno/KanbanTechno";
+import KanbanYV from "./Pages/YouthVibes/KanbanYV";
 
 const LargeScreenContent = () => {
   return (
@@ -73,6 +88,7 @@ const App = () => {
           <Route path="/businesssquad" element={<BusinessSquad />}/>
           <Route path="/cognizance" element={<Cognizance />}/>
           <Route path="/communiqa" element={<Communiqa />}/>
+          <Route path="/ecobiz" element={<EcoBiz />}/>
           <Route path="/graffiti" element={<Graffiti />}/>
           <Route path="/ignitedminds" element={<IgnitedMinds />}/>
           <Route path="/khelratna" element={<KhelRatna />}/>
@@ -87,6 +103,22 @@ const App = () => {
           <Route path="/kanban/:sessionKey" element={<Kanban />}/>
           <Route path="/gallery" element={<Gallery />}/>
           <Route path="/kanbancombined" element={<KanbanCombined />} />
+          <Route path="/kanban/BusinessSquad" element={<KanbanBS />}/>
+          <Route path="/kanban/Cognizance" element={<KanbanCog />}/>
+          <Route path="/kanban/Communiqa" element={<KanbanComm />}/>
+          <Route path="/kanban/EcoBiz" element={<KanbanEB />}/>
+          <Route path="/kanban/Graffiti" element={<KanbanG />}/>
+          <Route path="/kanban/IgnitedMinds" element={<KanbanIG />}/>
+          <Route path="/kanban/KhelRatna" element={<KanbanKR />}/>
+          <Route path="/kanban/MarketMavens" element={<KanbanMar />}/>
+          <Route path="/kanban/MoneyMatrix" element={<KanbanMon />}/>
+          <Route path="/kanban/Navrang" element={<KanbanN />}/>
+          <Route path="/kanban/Pixels" element={<KanbanPix />}/>
+          <Route path="/kanban/Prayaas" element={<KanbanPra />}/>
+          <Route path="/kanban/Synchronize" element={<KanbanSync />}/>
+          <Route path="/kanban/Techno" element={<KanbanTechno />}/>
+          <Route path="/kanban/YouthVibes" element={<KanbanYV />}/>
+
           </Routes>
       </BrowserRouter>
     </div>

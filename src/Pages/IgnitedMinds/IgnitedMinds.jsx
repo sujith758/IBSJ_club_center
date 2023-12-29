@@ -1,8 +1,9 @@
 import React from 'react'
+import NavbarIG from './NavbarIG';
 
 const IgnitedMinds = () => {
   return (
-    <div>IgnitedMinds</div>
+    <div><NavbarIG /></div>
   )
 }
 

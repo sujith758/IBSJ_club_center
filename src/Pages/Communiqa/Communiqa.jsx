@@ -1,8 +1,11 @@
 import React from 'react'
+import NavbarComm from './NavbarComm';
 
 const Communiqa = () => {
   return (
-    <div>Communiqa</div>
+    <div>
+      <NavbarComm />
+    </div>
   )
 }
 

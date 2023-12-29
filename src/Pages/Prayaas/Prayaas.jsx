@@ -1,8 +1,9 @@
 import React from 'react'
+import NavbarPra from './NavbarPra';
 
 const Prayaas = () => {
   return (
-    <div>Prayaas</div>
+    <div><NavbarPra /></div>
   )
 }
 

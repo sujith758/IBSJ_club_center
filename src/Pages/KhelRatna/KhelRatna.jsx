@@ -1,8 +1,9 @@
 import React from 'react'
+import NavbarKR from './NavbarKR';
 
 const KhelRatna = () => {
   return (
-    <div>KhelRatna</div>
+    <div><NavbarKR /></div>
   )
 }
 

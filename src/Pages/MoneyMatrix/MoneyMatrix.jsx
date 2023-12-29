@@ -1,8 +1,11 @@
 import React from 'react'
+import NavbarMon from './NavbarMon';
 
 const MoneyMatrix = () => {
   return (
-    <div>MoneyMatrix</div>
+    <div>
+      <NavbarMon />
+    </div>
   )
 }
 

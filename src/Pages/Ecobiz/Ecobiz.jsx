@@ -1,9 +1,10 @@
 import React from 'react'
+import NavbarEB from './NavbarEB';
 
-const Ecobiz = () => {
+const EcoBiz = () => {
   return (
-    <div>Ecobiz</div>
-  )
+    <div><NavbarEB /></div>
+  ) 
 }
 
-export default Ecobiz;
+export default EcoBiz;

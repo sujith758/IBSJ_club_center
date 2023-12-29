@@ -1,8 +1,11 @@
 import React from 'react'
+import NavbarMar from './NavbarMar';
 
 const MarketMavens = () => {
   return (
-    <div>MarketMavens</div>
+    <div>
+      <NavbarMar />
+    </div>
   )
 }
 

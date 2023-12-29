@@ -1,8 +1,11 @@
 import React from 'react'
+import NavbarG from './NavbarG';
 
 const Graffiti = () => {
   return (
-    <div>Graffiti</div>
+    <div>
+      <NavbarG />
+    </div>
   )
 }
 

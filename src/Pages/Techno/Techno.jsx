@@ -1,8 +1,9 @@
 import React from 'react'
+import NavbarTech from './NavbarTech';
 
 const Techno = () => {
   return (
-    <div>Techno</div>
+    <div><NavbarTech /></div>
   )
 }
 

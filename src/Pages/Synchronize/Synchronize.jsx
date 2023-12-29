@@ -1,8 +1,10 @@
 import React from 'react'
+import NavbarSync from './NavbarSync';
+
 
 const Synchronize = () => {
   return (
-    <div>Synchronize</div>
+    <div><NavbarSync /></div>
   )
 }
 
