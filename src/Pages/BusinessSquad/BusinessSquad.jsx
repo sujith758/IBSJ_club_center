@@ -8,7 +8,6 @@ const BusinessSquad = () => {
       <SessionProvider>
         <Kanban sessionKey="BusinessSquad" />
       </SessionProvider>
-      
     </div>
   )
 }
