@@ -49,7 +49,7 @@ const LargeScreenContent = () => {
 const SmallScreenContent = () => {
   return (
     <div>
-      <h1>This is the heading for screens less than 1200 pixels.</h1>
+      <h1>Sorry we are still under development for mobile phones, Kindly use your laptop.</h1>
     </div>
   );
 };
@@ -72,7 +72,6 @@ const App = () => {
     <div>
       <BrowserRouter>
         <Routes>
-          
         <Route
             path="/"
             element={
@@ -118,8 +117,7 @@ const App = () => {
           <Route path="/kanban/Synchronize" element={<KanbanSync />}/>
           <Route path="/kanban/Techno" element={<KanbanTechno />}/>
           <Route path="/kanban/YouthVibes" element={<KanbanYV />}/>
-
-          </Routes>
+        </Routes>
       </BrowserRouter>
     </div>
   );
