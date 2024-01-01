@@ -121,8 +121,6 @@ function Kanban({ sessionKey }) {
         <div className="app_outer">
           <div className="app_boards">
             {data.map((item) => (
-              
-              <React.memo key={item.id}>
               <Board
                 key={item.id}
                 id={item.id}
@@ -133,8 +131,6 @@ function Kanban({ sessionKey }) {
                 removeCard={removeCard}
                 removeBoard={removeBoard}
               />
-              </React.memo>
-
             ))}
             <Editable
               class={"add__board"}
