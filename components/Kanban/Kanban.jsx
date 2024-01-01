@@ -16,7 +16,7 @@ function Kanban({ sessionKey }) {
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    const socketUrl = `https://master--aquamarine-bavarois-e12d1e.netlify.app/kanban/${sessionKey}`;
+    const socketUrl = `https://master--aquamarine-bavarois-e12d1e.netlify.app/#/kanban/${sessionKey}`;
     // Connect to WebSocket server
     const newSocket = io(socketUrl);
 
