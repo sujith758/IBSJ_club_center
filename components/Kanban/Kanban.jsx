@@ -1,41 +1,57 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { io } from "socket.io-client";
+import { DragDropContext } from "react-beautiful-dnd";
+import { v4 as uuidv4 } from "uuid";
+import useLocalStorage from "use-local-storage";
+import PropTypes from "prop-types";
 import "./Kanban.css";
 import Navbar from "./Navbar/Navbar";
 import Board from "./Board/Board";
-// import data from '../data'
-import { DragDropContext } from "react-beautiful-dnd";
-import { v4 as uuidv4 } from "uuid";
 import Editable from "./Editable/Editable";
-import useLocalStorage from "use-local-storage";
 import "../../bootstrap.css";
 
 function Kanban({ sessionKey }) {
   const sessionDataKey = `kanban-board-${sessionKey}`;
-  const [data, setData] = useState(
-    localStorage.getItem(sessionDataKey) ? JSON.parse(localStorage.getItem(sessionDataKey)) : []
-  );
+  const [data, setData] = useLocalStorage(sessionDataKey, []);
+  const [theme, setTheme] = useLocalStorage("theme", "light");
+  const [socket, setSocket] = useState(null);
 
-  const defaultDark = window.matchMedia(
-    "(prefers-colors-scheme: dark)"
-  ).matches;
-  const [theme, setTheme] = useLocalStorage(
-    "theme",
-    defaultDark ? "dark" : "light"
-  );
+  useEffect(() => {
+    // Connect to WebSocket server
+    const newSocket = io("https://d25kfh1l-3000.inc1.devtunnels.ms/");
+
+    newSocket.on("update", (updatedData) => {
+      // Update local storage data with WebSocket updates
+      setData(updatedData);
+    });
+
+    // Set the socket in the state
+    setSocket(newSocket);
+
+    return () => {
+      // Disconnect the socket on component unmount
+      newSocket.disconnect();
+    };
+  }, [setData]);
 
   const switchTheme = () => {
-    setTheme(theme === "light" ? "dark" : "light");
+    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
   };
 
-  const setName = (title, bid) => {
-    const index = data.findIndex((item) => item.id === bid);
-    const tempData = [...data];
-    tempData[index].boardName = title;
-    setData(tempData);
+  const onDragEnd = (result) => {
+    const { source, destination } = result;
+    if (!destination) return;
+
+    if (source.droppableId === destination.droppableId) return;
+
+    const updatedData = dragCardInBoard(source, destination);
+    // Update local storage and emit update to WebSocket server
+    setData(updatedData);
+    socket.emit("update", updatedData);
   };
 
   const dragCardInBoard = (source, destination) => {
-    let tempData = [...data];
+    const tempData = [...data];
     const destinationBoardIdx = tempData.findIndex(
       (item) => item.id.toString() === destination.droppableId
     );
@@ -52,91 +68,61 @@ function Kanban({ sessionKey }) {
     return tempData;
   };
 
-  // const dragCardInSameBoard = (source, destination) => {
-  //   let tempData = Array.from(data);
-  //   console.log("Data", tempData);
-  //   const index = tempData.findIndex(
-  //     (item) => item.id.toString() === source.droppableId
-  //   );
-  //   console.log(tempData[index], index);
-  //   let [removedCard] = tempData[index].card.splice(source.index, 1);
-  //   tempData[index].card.splice(destination.index, 0, removedCard);
-  //   setData(tempData);
-  // };
+  const setName = (title, bid) => {
+    const updatedData = data.map((item) =>
+      item.id === bid ? { ...item, boardName: title } : item
+    );
+    // Update local storage and emit update to WebSocket server
+    setData(updatedData);
+    socket.emit("update", updatedData);
+  };
 
   const addCard = (title, bid) => {
-    const index = data.findIndex((item) => item.id === bid);
-    const tempData = [...data];
-    tempData[index].card.push({
-      id: uuidv4(),
-      title: title,
-      tags: [],
-      task: [],
-    });
-    setData(tempData);
+    const updatedData = data.map((item) =>
+      item.id === bid
+        ? { ...item, card: [...item.card, { id: uuidv4(), title, tags: [], task: [] }] }
+        : item
+    );
+    // Update local storage and emit update to WebSocket server
+    setData(updatedData);
+    socket.emit("update", updatedData);
   };
 
   const removeCard = (boardId, cardId) => {
-    const index = data.findIndex((item) => item.id === boardId);
-    const tempData = [...data];
-    const cardIndex = data[index].card.findIndex((item) => item.id === cardId);
-
-    tempData[index].card.splice(cardIndex, 1);
-    setData(tempData);
+    const updatedData = data.map((item) =>
+      item.id === boardId
+        ? { ...item, card: item.card.filter((card) => card.id !== cardId) }
+        : item
+    );
+    // Update local storage and emit update to WebSocket server
+    setData(updatedData);
+    socket.emit("update", updatedData);
   };
 
   const addBoard = (title) => {
-    const tempData = [...data];
-    tempData.push({
-      id: uuidv4(),
-      boardName: title,
-      card: [],
-    });
-    setData(tempData);
+    const updatedData = [...data, { id: uuidv4(), boardName: title, card: [] }];
+    // Update local storage and emit update to WebSocket server
+    setData(updatedData);
+    socket.emit("update", updatedData);
   };
 
   const removeBoard = (bid) => {
-    const tempData = [...data];
-    const index = data.findIndex((item) => item.id === bid);
-    tempData.splice(index, 1);
-    setData(tempData);
+    const updatedData = data.filter((item) => item.id !== bid);
+    // Update local storage and emit update to WebSocket server
+    setData(updatedData);
+    socket.emit("update", updatedData);
   };
-
-  const onDragEnd = (result) => {
-    const { source, destination } = result;
-    if (!destination) return;
-
-    if (source.droppableId === destination.droppableId) return;
-
-    setData(dragCardInBoard(source, destination));
-  };
-
-  const updateCard = (bid, cid, card) => {
-    const index = data.findIndex((item) => item.id === bid);
-    if (index < 0) return;
-
-    const tempBoards = [...data];
-    const cards = tempBoards[index].card;
-
-    const cardIndex = cards.findIndex((item) => item.id === cid);
-    if (cardIndex < 0) return;
-
-    tempBoards[index].card[cardIndex] = card;
-    console.log(tempBoards);
-    setData(tempBoards);
-  };
- 
-  useEffect(() => {
-    localStorage.setItem(sessionDataKey, JSON.stringify(data));
-  }, [data]);
+  
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div className="App" data-theme={theme}>
-        <Navbar switchTheme={switchTheme} resetData={() => setData([])}/>
+        <Navbar switchTheme={switchTheme} resetData={() => setData([])} />
         <div className="app_outer">
           <div className="app_boards">
             {data.map((item) => (
+              
+              <React.memo key={item.id}>
               <Board
                 key={item.id}
                 id={item.id}
@@ -146,22 +132,26 @@ function Kanban({ sessionKey }) {
                 addCard={addCard}
                 removeCard={removeCard}
                 removeBoard={removeBoard}
-                updateCard={updateCard}
               />
+              </React.memo>
+
             ))}
             <Editable
               class={"add__board"}
               name={"Add Board"}
               btnName={"Add Board"}
               onSubmit={addBoard}
-              placeholder={"Enter Board  Title"}
+              placeholder={"Enter Board Title"}
             />
-            
           </div>
         </div>
       </div>
     </DragDropContext>
   );
 }
+
+Kanban.propTypes = {
+  sessionKey: PropTypes.string.isRequired,
+};
 
 export default Kanban;

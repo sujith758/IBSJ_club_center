@@ -67,7 +67,7 @@ const App = () => {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, []);
+  }, [windowWidth]);
   return (
     <div>
       <BrowserRouter>
