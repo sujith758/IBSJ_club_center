@@ -13,7 +13,6 @@ import "../../bootstrap.css";
 function Kanban({ sessionKey }) {
   const sessionDataKey = `kanban-board-${sessionKey}`;
   const [data, setData] = useLocalStorage(sessionDataKey, []);
-  const [theme, setTheme] = useLocalStorage("theme", "light");
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
@@ -34,9 +33,7 @@ function Kanban({ sessionKey }) {
     };
   }, [setData]);
 
-  const switchTheme = () => {
-    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
-  };
+  
 
   const onDragEnd = (result) => {
     const { source, destination } = result;
@@ -116,7 +113,7 @@ function Kanban({ sessionKey }) {
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <div className="App" data-theme={theme}>
+      <div className="App">
         <Navbar switchTheme={switchTheme} resetData={() => setData([])} />
         <div className="app_outer">
           <div className="app_boards">
