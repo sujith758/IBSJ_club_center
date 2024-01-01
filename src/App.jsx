@@ -105,7 +105,7 @@ const App = () => {
           <Route path="/kanban/BusinessSquad" element={<KanbanBS />}/>
           <Route path="/kanban/Cognizance" element={<KanbanCog />}/>
           <Route path="/kanban/Communiqa" element={<KanbanComm />}/>
-          <Route path="/kanban/EcoBiz" element={<KanbanEB />}/>
+          {/* <Route path="/kanban/EcoBiz" element={<KanbanEB />}/> */}
           <Route path="/kanban/Graffiti" element={<KanbanG />}/>
           <Route path="/kanban/IgnitedMinds" element={<KanbanIG />}/>
           <Route path="/kanban/KhelRatna" element={<KanbanKR />}/>
