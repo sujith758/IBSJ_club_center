@@ -16,8 +16,9 @@ function Kanban({ sessionKey }) {
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
+    const socketUrl = `https://master--aquamarine-bavarois-e12d1e.netlify.app/kanban/${sessionKey}`;
     // Connect to WebSocket server
-    const newSocket = io("https://master--aquamarine-bavarois-e12d1e.netlify.app/");
+    const newSocket = io(socketUrl);
 
     newSocket.on("update", (updatedData) => {
       // Update local storage data with WebSocket updates
