@@ -25,7 +25,7 @@ import KanbanCombined from "./Pages/DeansCorner/KanbanCombined/KanbanCombined";
 import KanbanBS from "./Pages/BusinessSquad/KanbanBS";
 import KanbanCog from "./Pages/Cognizance/KanbanCog";
 import KanbanComm from "./Pages/Communiqa/KanbanComm";
-import KanbanEB from "./Pages/EcoBiz/KanbanEB"
+// import KanbanEB from "./Pages/EcoBiz/KanbanEB"
 import KanbanG from "./Pages/Graffiti/KanbanG";
 import KanbanIG from "./Pages/IgnitedMinds/KanbanIG"
 import KanbanKR from "./Pages/KhelRatna/KanbanKR";
