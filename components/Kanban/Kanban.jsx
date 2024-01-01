@@ -18,18 +18,30 @@ function Kanban({ sessionKey }) {
   useEffect(() => {
     const socketUrl = `https://master--aquamarine-bavarois-e12d1e.netlify.app/#/kanban/${sessionKey}`;
     // Connect to WebSocket server
-    const newSocket = io(socketUrl);
+    const newSocket = io(socketUrl, {
+      transports: ['websocket'], // Explicitly set to use WebSocket
+    });
 
-    newSocket.on("update", (updatedData) => {
-      // Update local storage data with WebSocket updates
+    newSocket.on('connect', () => {
+      console.log('WebSocket Connection Established');
+    });
+
+    newSocket.on('update', (updatedData) => {
+      console.log('Received WebSocket Update:', updatedData);
       setData(updatedData);
     });
 
-    // Set the socket in the state
+    newSocket.on('disconnect', () => {
+      console.log('WebSocket Connection Closed');
+    });
+
+    newSocket.on('error', (error) => {
+      console.error('WebSocket Error:', error);
+    });
+
     setSocket(newSocket);
 
     return () => {
-      // Disconnect the socket on component unmount
       newSocket.disconnect();
     };
   }, [sessionKey, setData]);

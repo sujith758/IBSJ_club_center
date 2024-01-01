@@ -1,33 +1,26 @@
 const express = require('express');
-const https = require('https');
+const cors = require('cors');
+const http = require('http');
 const { Server } = require('socket.io');
 
 const app = express();
-const httpsServer = https.createServer(app);
+const httpServer = http.createServer(app);
 
-// ... other Express configurations ...
+// Enable CORS for all routes
+app.use(cors());
 
-// Add the CORS configuration for Socket.IO
-const io = new Server(httpsServer, {
+// ... other middleware and route configurations ...
+
+const io = new Server(httpServer, {
   cors: {
-    origin: 'https://master--aquamarine-bavarois-e12d1e.netlify.app/',
+    origin: 'https://master--aquamarine-bavarois-e12d1e.netlify.app/', // Replace with your React app's domain
     methods: ['GET', 'POST'],
   },
 });
 
-// Handle WebSocket connections
-io.on('connection', (socket) => {
-  console.log('A user connected');
+// Handle WebSocket connections and other server logic
 
-  // Handle other WebSocket events here...
-
-  socket.on('disconnect', () => {
-    console.log('User disconnected');
-  });
-});
-
-// Start the HTTP server
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 httpServer.listen(PORT, () => {
   // console.log(`Server is running on http://localhost:${PORT}`);
 });
