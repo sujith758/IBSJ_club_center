@@ -32,7 +32,7 @@ function Kanban({ sessionKey }) {
       // Disconnect the socket on component unmount
       newSocket.disconnect();
     };
-  }, [setData]);
+  }, [sessionKey, setData]);
 
   
 
