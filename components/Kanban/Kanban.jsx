@@ -114,7 +114,7 @@ function Kanban({ sessionKey }) {
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div className="App">
-        <Navbar switchTheme={switchTheme} resetData={() => setData([])} />
+        <Navbar resetData={() => setData([])} />
         <div className="app_outer">
           <div className="app_boards">
             {data.map((item) => (
