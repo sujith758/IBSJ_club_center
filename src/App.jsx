@@ -6,7 +6,7 @@ import DeansCorner from "./Pages/DeansCorner/DeansCorner";
 import BusinessSquad from "./Pages/BusinessSquad/BusinessSquad";
 import Cognizance from "./Pages/Cognizance/Cognizance";
 import Communiqa from "./Pages/Communiqa/Communiqa";
-import EcoBiz from "./Pages/EcoBiz/EcoBiz";
+
 import Graffiti from "./Pages/Graffiti/Graffiti"; 
 import IgnitedMinds from "./Pages/IgnitedMinds/IgnitedMinds";
 import KhelRatna from "./Pages/KhelRatna/KhelRatna";
@@ -87,7 +87,7 @@ const App = () => {
           <Route path="/businesssquad" element={<BusinessSquad />}/>
           <Route path="/cognizance" element={<Cognizance />}/>
           <Route path="/communiqa" element={<Communiqa />}/>
-          <Route path="/ecobiz" element={<EcoBiz />}/>
+          
           <Route path="/graffiti" element={<Graffiti />}/>
           <Route path="/ignitedminds" element={<IgnitedMinds />}/>
           <Route path="/khelratna" element={<KhelRatna />}/>
