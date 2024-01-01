@@ -6,7 +6,7 @@ import DeansCorner from "./Pages/DeansCorner/DeansCorner";
 import BusinessSquad from "./Pages/BusinessSquad/BusinessSquad";
 import Cognizance from "./Pages/Cognizance/Cognizance";
 import Communiqa from "./Pages/Communiqa/Communiqa";
-
+import EcoBiz from "./Pages/EcoBiz/EcoBiz";
 import Graffiti from "./Pages/Graffiti/Graffiti"; 
 import IgnitedMinds from "./Pages/IgnitedMinds/IgnitedMinds";
 import KhelRatna from "./Pages/KhelRatna/KhelRatna";
@@ -25,7 +25,6 @@ import KanbanCombined from "./Pages/DeansCorner/KanbanCombined/KanbanCombined";
 import KanbanBS from "./Pages/BusinessSquad/KanbanBS";
 import KanbanCog from "./Pages/Cognizance/KanbanCog";
 import KanbanComm from "./Pages/Communiqa/KanbanComm";
-// import KanbanEB from "./Pages/EcoBiz/KanbanEB"
 import KanbanG from "./Pages/Graffiti/KanbanG";
 import KanbanIG from "./Pages/IgnitedMinds/KanbanIG"
 import KanbanKR from "./Pages/KhelRatna/KanbanKR";
@@ -37,6 +36,7 @@ import KanbanPra from "./Pages/Prayaas/KanbanPra";
 import KanbanSync from "./Pages/Synchronize/KanbanSync";
 import KanbanTechno from "./Pages/Techno/KanbanTechno";
 import KanbanYV from "./Pages/YouthVibes/KanbanYV";
+import KanbanEB from "./Pages/EcoBiz/KanbanEB";
 
 const LargeScreenContent = () => {
   return (
@@ -87,7 +87,7 @@ const App = () => {
           <Route path="/businesssquad" element={<BusinessSquad />}/>
           <Route path="/cognizance" element={<Cognizance />}/>
           <Route path="/communiqa" element={<Communiqa />}/>
-          
+          <Route path="/ecobiz" element={<EcoBiz />}/>
           <Route path="/graffiti" element={<Graffiti />}/>
           <Route path="/ignitedminds" element={<IgnitedMinds />}/>
           <Route path="/khelratna" element={<KhelRatna />}/>
@@ -105,7 +105,7 @@ const App = () => {
           <Route path="/kanban/BusinessSquad" element={<KanbanBS />}/>
           <Route path="/kanban/Cognizance" element={<KanbanCog />}/>
           <Route path="/kanban/Communiqa" element={<KanbanComm />}/>
-          {/* <Route path="/kanban/EcoBiz" element={<KanbanEB />}/> */}
+          <Route path="/kanban/ecobiz" element={<KanbanEB />}/>
           <Route path="/kanban/Graffiti" element={<KanbanG />}/>
           <Route path="/kanban/IgnitedMinds" element={<KanbanIG />}/>
           <Route path="/kanban/KhelRatna" element={<KanbanKR />}/>

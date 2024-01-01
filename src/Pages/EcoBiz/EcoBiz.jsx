@@ -1,7 +1,7 @@
 import React from 'react'
 import NavbarEB from './NavbarEB';
 
-const Communiqa = () => {
+const EcoBiz = () => {
   return (
     <div>
       <NavbarEB />
@@ -9,4 +9,4 @@ const Communiqa = () => {
   )
 }
 
-export default Communiqa;
+export default EcoBiz;
