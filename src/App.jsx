@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route} from 'react-router-dom';
+import { HashRouter as Router, Routes, Route} from 'react-router-dom';
 import { useState, useEffect } from "react";
 import Homepage from "./Pages/Homepage/Homepage";
 import DeansCorner from "./Pages/DeansCorner/DeansCorner";
@@ -70,7 +70,7 @@ const App = () => {
   }, [windowWidth]);
   return (
     <div>
-      <BrowserRouter>
+      <Router>
         <Routes>
         <Route
             path="/"
@@ -118,7 +118,7 @@ const App = () => {
           <Route path="/kanban/Techno" element={<KanbanTechno />}/>
           <Route path="/kanban/YouthVibes" element={<KanbanYV />}/>
         </Routes>
-      </BrowserRouter>
+      </Router>
     </div>
   );
 };

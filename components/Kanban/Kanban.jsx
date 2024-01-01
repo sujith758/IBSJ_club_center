@@ -18,7 +18,7 @@ function Kanban({ sessionKey }) {
 
   useEffect(() => {
     // Connect to WebSocket server
-    const newSocket = io("https://d25kfh1l-3000.inc1.devtunnels.ms/");
+    const newSocket = io("https://master--aquamarine-bavarois-e12d1e.netlify.app/");
 
     newSocket.on("update", (updatedData) => {
       // Update local storage data with WebSocket updates
