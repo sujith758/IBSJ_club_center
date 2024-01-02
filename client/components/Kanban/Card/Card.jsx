@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Draggable } from "react-beautiful-dnd";
-import { Calendar, CheckSquare, Clock, MoreHorizontal } from "react-feather";
-import Dropdown from "../Dropdown/Dropdown";
-import Modal from "../Modal/Modal";
+import { CheckSquare, Clock, MoreHorizontal } from "react-feather";
 import Tag from "../Tags/Tag";
 import "./Card.css";
 import CardDetails from "./CardDetails/CardDetails";
@@ -29,7 +27,7 @@ const Card = (props) => {
   };
 
   const formatDate = (date) => {
-    return date ? date.toLocaleDateString() : "";
+    return date ? date.toLocaleDateString('en-GB') : "";
   };
 
   return (
@@ -85,7 +83,7 @@ const Card = (props) => {
                   <DatePicker
                     selected={selectedDateTime}
                     onChange={handleDateChange}
-                    dateFormat="P"
+                    dateFormat="dd/MM/YYYY"
                     popperPlacement="right"
                     placeholderText="Choose a date"
                     portalId="root"
