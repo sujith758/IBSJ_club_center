@@ -22,9 +22,11 @@ const Card = (props) => {
 
   const handleDateChange = (date) => {
     setSelectedDateTime(date);
-    // Save selected date to localStorage
-    localStorage.setItem(`selectedDate_${props.id}`, date.toISOString());
-  };
+  
+      // Save selected date to localStorage
+      localStorage.setItem(`selectedDate_${props.id}`, date.toISOString());
+    };
+  
 
   const formatDate = (date) => {
     return date ? date.toLocaleDateString('en-GB') : "";

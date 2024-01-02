@@ -22,6 +22,7 @@ function Kanban({ sessionKey }) {
 
     const updatedData = dragCardInBoard(source, destination);
     setData(updatedData);
+    // console.log(updatedData);
   };
 
   const dragCardInBoard = (source, destination) => {
@@ -54,7 +55,7 @@ function Kanban({ sessionKey }) {
       item.id === bid
         ? {
             ...item,
-            card: [...item.card, { id: uuidv4(), title, tags: [], task: [], selectedDate: null, }],
+            card: [...item.card, { id: uuidv4(), title, tags: [], task: []}],
           }
         : item
     );
@@ -80,19 +81,6 @@ function Kanban({ sessionKey }) {
     setData(updatedData);
   };
 
-  const handleCardDateChange = (date, cardId) => {
-    // Handle the date change for the specific card in the Kanban component
-    // You can update the state or perform any necessary logic here
-    const updatedData = data.map((board) => ({
-      ...board,
-      card: board.card.map((card) =>
-        card.id === cardId ? { ...card, selectedDate: date } : card
-      ),
-    }));
-    setData(updatedData);
-  };
- 
-
   return (
     
     <>
@@ -111,7 +99,7 @@ function Kanban({ sessionKey }) {
                   addCard={addCard}
                   removeCard={removeCard}
                   removeBoard={removeBoard}
-                  handleCardDateChange={handleCardDateChange}
+                  
 
                 />
               ))}
