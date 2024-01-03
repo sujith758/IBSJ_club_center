@@ -12,7 +12,7 @@ import { io } from "socket.io-client";
 
 
 function Kanban({ sessionKey }) {
-  const socket = io(`http://localhost:3000/#/kanban/?session=${sessionKey}`);
+  const socket = io(`https://master--snazzy-narwhal-9642ee.netlify.app/#/kanban/?session=${sessionKey}`);
 
   const sessionDataKey = `kanban-board-${sessionKey}`;
   const [data, setData] = useLocalStorage(sessionDataKey, []);
