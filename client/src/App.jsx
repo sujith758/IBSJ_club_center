@@ -38,6 +38,7 @@ import KanbanTechno from "./Pages/Techno/KanbanTechno";
 import KanbanYV from "./Pages/YouthVibes/KanbanYV";
 import KanbanEB from "./Pages/EcoBiz/KanbanEB";
 
+
 const LargeScreenContent = () => {
   return (
     <div>

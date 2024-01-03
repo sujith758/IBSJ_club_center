@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { useState, useEffect, useRef } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
 import { v4 as uuidv4 } from "uuid";
 import useLocalStorage from "use-local-storage";
@@ -7,22 +8,56 @@ import Navbar from "./Navbar/Navbar";
 import Board from "./Board/Board";
 import Editable from "./Editable/Editable";
 import "../../bootstrap.css";
+import { io } from "socket.io-client";
 
 
 function Kanban({ sessionKey }) {
+  const socket = io(`http://localhost:3000/#/kanban/?session=${sessionKey}`);
+
   const sessionDataKey = `kanban-board-${sessionKey}`;
   const [data, setData] = useLocalStorage(sessionDataKey, []);
+  const [refresh, setRefresh] = useState(false);
 
-  
+  useEffect(() => {
+    const storedData = localStorage.getItem(sessionDataKey);
+    if (storedData) {
+      setData(JSON.parse(storedData));
+    }
+  }, [sessionDataKey, setData]);
+
+  useEffect(() => {
+    
+    const handleBroadcastedData = (broadcastedData) => {
+      // Update the local state
+      setData(broadcastedData);
+    
+      // Update local storage
+      localStorage.setItem(sessionDataKey, JSON.stringify(broadcastedData));
+    
+      console.log("Received broadcasted data:", broadcastedData);
+    
+      // Trigger a refresh by toggling the refresh state
+      setRefresh((prevRefresh) => !prevRefresh);
+    };
+
+    socket.on("kanban_data_broadcast", handleBroadcastedData);
+
+    return () => {
+      socket.off("kanban_data_broadcast", handleBroadcastedData);
+    };
+  }, [setData, sessionDataKey, socket, refresh]);
+
+  const handleUpdateButtonClick = () => {
+    console.log("Emitting updated data:", data);
+    socket.emit("kanban_data_updated", { sessionKey, data });
+  };
 
   const onDragEnd = (result) => {
     const { source, destination } = result;
     if (!destination) return;
     if (source.droppableId === destination.droppableId) return;
-
     const updatedData = dragCardInBoard(source, destination);
     setData(updatedData);
-    // console.log(updatedData);
   };
 
   const dragCardInBoard = (source, destination) => {
@@ -114,7 +149,7 @@ function Kanban({ sessionKey }) {
           </div>
         </div>
       </DragDropContext>
-      
+      <button onClick={handleUpdateButtonClick}>Update Data</button>
     </>
   );
 }
