@@ -1,12 +1,12 @@
 import React from 'react'
-import KanbanCombined from './KanbanCombined/KanbanCombined';
 import { Link } from 'react-router-dom';
 
-const DeansCorner = () => {
+const DeansCorner = ({socketForFiles}) => {
   return (
     <div>
     <Link to="/">Home</Link>
     <Link to='/kanbancombined'>Kanban Boards</Link>
+    <Link to='/documentupload'>Document Upload</Link>
    </div>
   )
 }

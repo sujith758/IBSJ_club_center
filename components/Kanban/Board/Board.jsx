@@ -23,7 +23,7 @@ export default function Board(props) {
       });
     };
   });
-
+  
   return (
     <div className="board">
       <div className="board__top">
@@ -87,6 +87,11 @@ export default function Board(props) {
                 updateCard={props.updateCard}
                 removeCard={props.removeCard}
                 card={items}
+                onDateChange={(cardId, date) =>
+                  props.onCardDateChange(props.id, cardId, date)
+                }
+                addCard={(title, bid, selectedDate) => props.addCard(title, bid, selectedDate)}
+                selectedDate={items.selectedDate}
               />
             ))}
             {provided.placeholder}

@@ -20,17 +20,19 @@ const Card = (props) => {
     }
   }, [props.id]);
 
-  const handleDateChange = (date) => {
-    setSelectedDateTime(date);
-  
-      // Save selected date to localStorage
+    const handleDateChange = (date) => {
+      setSelectedDateTime(date);
       localStorage.setItem(`selectedDate_${props.id}`, date.toISOString());
+  
+      if (props.onDateChange) {
+        props.onDateChange(props.id, date); // Pass the card id along with the selected date
+      }
     };
   
 
-  const formatDate = (date) => {
-    return date ? date.toLocaleDateString('en-GB') : "";
-  };
+  // const formatDate = (selectedDate) => {
+  //   return date ? date.toLocaleDateString('en-GB') : "";
+  // };
 
   return (
     <Draggable
@@ -78,14 +80,14 @@ const Card = (props) => {
                 <span className="icon__sm">
                     <Clock />
                   </span>
-              <p className="date__footer">{formatDate(selectedDateTime)}</p>
+              <p className="date__footer"> {props.selectedDate}</p>
               </div>
-              {!selectedDateTime && (
+              {!props.selectedDate && (
                 <div className="datepicker__container">
                   <DatePicker
                     selected={selectedDateTime}
                     onChange={handleDateChange}
-                    dateFormat="dd/MM/YYYY"
+                    dateFormat="dd/MM/yyyy"
                     popperPlacement="right"
                     placeholderText="Choose a date"
                     portalId="root"

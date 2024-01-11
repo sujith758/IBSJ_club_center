@@ -12,6 +12,9 @@ const NavbarComm = () => {
           <li>
             <Link to='/kanban/Communiqa'>Kanban</Link>
           </li>
+          <li>
+          <Link to='/documentupload/Communiqa'>Dropzone</Link>
+          </li>
         </ul>
       </div>
     </div>

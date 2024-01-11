@@ -72,6 +72,7 @@
   font-size: 0.75rem;
   color: rgb(125, 119, 126);
   font-weight: 600;
+  padding-top: 12px;
 }
 
 .cardfooter__date span{

@@ -14,6 +14,9 @@ const NavbarIG = () => {
               Kanban
             </Link>
           </li>
+          <li>
+          <Link to='/documentupload/IgnitedMinds'>Dropzone</Link>
+          </li>
         </ul>
       </div>
     </div>

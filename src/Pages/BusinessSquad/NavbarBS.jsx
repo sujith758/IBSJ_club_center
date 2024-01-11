@@ -1,7 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const NavbarBS = () => {
+const NavbarBS = ({onReset}) => {
+
+  const handleResetClick = () => {
+    const isConfirmed = window.confirm('Are you sure you want to reset the data?');
+    if (isConfirmed) {
+      onReset(); // Call the provided callback function for reset
+    }
+  };
   return (
     <div>
       <div className="navbar__container">
@@ -14,7 +21,14 @@ const NavbarBS = () => {
               Kanban
             </Link>
           </li>
+          <li>
+          <Link to='/documentupload/BusinessSquad'>Dropzone</Link>
+          </li>
         </ul>
+        <button onClick={handleResetClick} className="reset-button">
+              Reset
+            </button>
+
       </div>
     </div>
   );

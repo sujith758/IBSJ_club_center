@@ -14,6 +14,9 @@ const NavbarMon = () => {
               Kanban
             </Link>
           </li>
+          <li>
+          <Link to='/documentupload/MoneyMatrix'>Dropzone</Link>
+          </li>
         </ul>
       </div>
     </div>

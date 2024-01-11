@@ -1,0 +1,32 @@
+/* FileListPage.css */
+.file-list-container {
+  margin: 20px;
+}
+
+.file-list {
+  list-style: none;
+  padding: 0;
+}
+
+.file-list li {
+  cursor: pointer;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.file-preview {
+  width: 50px; /* Adjust the width of the preview as needed */
+  margin-right: 10px;
+}
+
+.file-preview img {
+  width: 100%;
+  height: auto;
+  border: 1px solid #ddd; /* Add a border for better visibility */
+  border-radius: 4px;
+}
+
+.file-name {
+  flex-grow: 1;
+}

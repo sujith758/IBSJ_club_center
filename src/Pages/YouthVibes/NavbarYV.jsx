@@ -14,6 +14,9 @@ const NavbarYV = () => {
               Kanban
             </Link>
           </li>
+          <li>
+          <Link to='/documentupload/YouthVibes'>Dropzone</Link>
+          </li>
         </ul>
       </div>
     </div>

@@ -13,6 +13,9 @@ const NavbarCog = () => {
           <li>
             <Link to="/kanban/Cognizance">Kanban</Link>
           </li>
+          <li>
+          <Link to='/documentupload/Cognizance'>Dropzone</Link>
+          </li>
         </ul>
       </div>
     </div>

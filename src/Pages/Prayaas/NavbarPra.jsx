@@ -14,6 +14,9 @@ const NavbarPra = () => {
               Kanban
             </Link>
           </li>
+          <li>
+          <Link to='/documentupload/Prayaas'>Dropzone</Link>
+          </li>
         </ul>
       </div>
     </div>

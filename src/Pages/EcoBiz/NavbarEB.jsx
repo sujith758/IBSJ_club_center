@@ -12,6 +12,9 @@ const NavbarEB = () => {
           <li>
             <Link to='/kanban/EcoBiz'>Kanban</Link>
           </li>
+          <li>
+          <Link to='/documentupload/EcoBiz'>Dropzone</Link>
+          </li>
         </ul>
       </div>
     </div>

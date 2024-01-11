@@ -1,0 +1,18 @@
+.document__upload {
+  text-align: center;
+  margin-top: 40px;
+}
+.document__upload h1{
+  font-size: 3rem;
+  margin-bottom: 20px;
+
+}
+
+.drop-zone {
+  height: 40vh;
+  width: 70%;
+  border: 1px dashed black;
+  /* text-align: center; */
+  margin: auto;
+  padding: 100px;
+}

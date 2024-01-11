@@ -14,6 +14,9 @@ const NavbarG = () => {
               Kanban
             </Link>
           </li>
+          <li>
+          <Link to='/documentupload/Graffiti'>Dropzone</Link>
+          </li>
         </ul>
       </div>
     </div>

@@ -14,6 +14,9 @@ const NavbarPix = () => {
               Kanban
             </Link>
           </li>
+          <li>
+          <Link to='/documentupload/Pixels'>Dropzone</Link>
+          </li>
         </ul>
       </div>
     </div>

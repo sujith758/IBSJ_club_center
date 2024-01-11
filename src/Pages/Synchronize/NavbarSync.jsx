@@ -14,6 +14,9 @@ const NavbarSync = () => {
               Kanban
             </Link>
           </li>
+          <li>
+          <Link to='/documentupload/Synchronize'>Dropzone</Link>
+          </li>
         </ul>
       </div>
     </div>

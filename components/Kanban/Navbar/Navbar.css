@@ -50,3 +50,26 @@
 .fa-sun {
   color: yellow;
 }
+
+.reset-button, .update-button {
+  border: none;
+  border-radius: 10px;
+  padding: 5px;
+  width: 80px;
+  margin-top: -10px;
+}
+
+.navbar__buttons{
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.update-button:hover{
+  background-color: #ccc;
+}
+
+.reset-button:hover{
+  background-color: #ccc;
+
+} 

@@ -14,6 +14,9 @@ const NavbarMar = () => {
           <li>
             <Link to="/kanban/MarketMavens">Kanban</Link>
           </li>
+          <li>
+          <Link to='/documentupload/MarketMavens'>Dropzone</Link>
+          </li>
         </ul>
       </div>
     </div>

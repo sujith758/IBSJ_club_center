@@ -1,6 +1,7 @@
 import React from "react";
-import { HashRouter as Router, Routes, Route} from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, useParams} from 'react-router-dom';
 import { useState, useEffect } from "react";
+import {io} from 'socket.io-client';
 import Homepage from "./Pages/Homepage/Homepage";
 import DeansCorner from "./Pages/DeansCorner/DeansCorner";
 import BusinessSquad from "./Pages/BusinessSquad/BusinessSquad";
@@ -37,6 +38,24 @@ import KanbanSync from "./Pages/Synchronize/KanbanSync";
 import KanbanTechno from "./Pages/Techno/KanbanTechno";
 import KanbanYV from "./Pages/YouthVibes/KanbanYV";
 import KanbanEB from "./Pages/EcoBiz/KanbanEB";
+import DocumentUploadBS from "./Pages/BusinessSquad/DocumentUploadBS";
+import DocumentUploadCog from "./Pages/Cognizance/DocumentUploadCog";
+import DocumentUploadComm from "./Pages/Communiqa/DocumentUploadComm";
+import DocumentUploadEB from "./Pages/EcoBiz/DocumentUploadEB";
+import DocumentUploadG from "./Pages/Graffiti/DocumentUploadG";
+import DocumentUploadIG from "./Pages/IgnitedMinds/DocumentUploadIG";
+import DocumentUploadKR from "./Pages/KhelRatna/DocumentUploadKR";
+import DocumentUploadMar from "./Pages/MarketMavens/DocumentUploadMar";
+import DocumentUploadMon from "./Pages/MoneyMatrix/DocumentUploadMon";
+import DocumentUploadN from "./Pages/Navrang/DocumentUploadN";
+import DocumentUploadPix from "./Pages/Pixels/DocumentUploadPix";
+import DocumentUploadPra from "./Pages/Prayaas/DocumentUploadPra";
+import DocumentUploadSync from "./Pages/Synchronize/DocumentUploadSync";
+import DocumentUploadTechno from "./Pages/Techno/DocumentUploadTechno";
+import DocumentUploadYV from "./Pages/YouthVibes/DocumentUploadYV";
+import DropZoneCombined from "./Pages/DeansCorner/DropZoneCombined/DropZoneCombined";
+import FileListPage from "./Pages/DeansCorner/DropZoneCombined/FileListPage";
+
 
 
 const LargeScreenContent = () => {
@@ -55,8 +74,14 @@ const SmallScreenContent = () => {
   );
 };
 
+
+
+
 const App = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  
+  const socketForFiles = io.connect(`http://localhost:3001`);
+
 
   useEffect(() => {
     const handleResize = () => {
@@ -69,6 +94,9 @@ const App = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, [windowWidth]);
+
+ 
+
   return (
     <div>
       <Router>
@@ -83,30 +111,30 @@ const App = () => {
               )
             }
           />
-          <Route path="/deanscorner" element={<DeansCorner />}/>
+          <Route path="/deanscorner" element={<DeansCorner socketForFiles={socketForFiles} />}/>
           <Route path="/aboutus" element={<AboutUs />}/>
-          <Route path="/businesssquad" element={<BusinessSquad />}/>
-          <Route path="/cognizance" element={<Cognizance />}/>
-          <Route path="/communiqa" element={<Communiqa />}/>
-          <Route path="/ecobiz" element={<EcoBiz />}/>
-          <Route path="/graffiti" element={<Graffiti />}/>
-          <Route path="/ignitedminds" element={<IgnitedMinds />}/>
-          <Route path="/khelratna" element={<KhelRatna />}/>
-          <Route path="/marketmavens" element={<MarketMavens />}/>
-          <Route path="/moneymatrix" element={<MoneyMatrix />}/>
-          <Route path="/navrang" element={<Navrang />}/>
-          <Route path="/pixels" element={<Pixels />}/>
-          <Route path="/prayaas" element={<Prayaas />}/>
-          <Route path="/synchronize" element={<Synchronize />}/>
-          <Route path="/techno" element={<Techno />}/>
-          <Route path="/youthvibes" element={<YouthVibes />}/>
+          <Route path="/businesssquad" element={<BusinessSquad socketForFiles={socketForFiles} sessionKey='BusinessSquad'/>}/>
+          <Route path="/cognizance" element={<Cognizance socketForFiles={socketForFiles} sessionKey='Cognizance'/>}/>
+          <Route path="/communiqa" element={<Communiqa socketForFiles={socketForFiles} sessionKey='Communiqa'/>}/>
+          <Route path="/ecobiz" element={<EcoBiz socketForFiles={socketForFiles} sessionKey='EcoBiz'/>}/>
+          <Route path="/graffiti" element={<Graffiti socketForFiles={socketForFiles} sessionKey='Graffiti'/>}/> 
+          <Route path="/ignitedminds" element={<IgnitedMinds socketForFiles={socketForFiles} sessionKey='IgnitedMinds'/>}/> 
+          <Route path="/khelratna" element={<KhelRatna socketForFiles={socketForFiles} sessionKey='KhelRatna'/>}/>
+          <Route path="/marketmavens" element={<MarketMavens socketForFiles={socketForFiles} sessionKey='MarketMavens'/>}/>
+          <Route path="/moneymatrix" element={<MoneyMatrix socketForFiles={socketForFiles} sessionKey='MoneyMatrix'/>}/>
+          <Route path="/navrang" element={<Navrang socketForFiles={socketForFiles} sessionKey='Navrang'/>}/>
+          <Route path="/pixels" element={<Pixels socketForFiles={socketForFiles} sessionKey='Pixels'/>}/>
+          <Route path="/prayaas" element={<Prayaas socketForFiles={socketForFiles} sessionKey='Prayaas'/>}/>
+          <Route path="/synchronize" element={<Synchronize socketForFiles={socketForFiles} sessionKey='Synchronize'/>}/>
+          <Route path="/techno" element={<Techno socketForFiles={socketForFiles} sessionKey='Techno'/>}/>
+          <Route path="/youthvibes" element={<YouthVibes socketForFiles={socketForFiles} sessionKey='YouthVibes'/>}/>
           <Route path="/kanban/:sessionKey" element={<Kanban />}/>
           <Route path="/gallery" element={<Gallery />}/>
           <Route path="/kanbancombined" element={<KanbanCombined />} />
           <Route path="/kanban/BusinessSquad" element={<KanbanBS />}/>
           <Route path="/kanban/Cognizance" element={<KanbanCog />}/>
           <Route path="/kanban/Communiqa" element={<KanbanComm />}/>
-          <Route path="/kanban/ecobiz" element={<KanbanEB />}/>
+          <Route path="/kanban/EcoBiz" element={<KanbanEB />}/>
           <Route path="/kanban/Graffiti" element={<KanbanG />}/>
           <Route path="/kanban/IgnitedMinds" element={<KanbanIG />}/>
           <Route path="/kanban/KhelRatna" element={<KanbanKR />}/>
@@ -118,6 +146,25 @@ const App = () => {
           <Route path="/kanban/Synchronize" element={<KanbanSync />}/>
           <Route path="/kanban/Techno" element={<KanbanTechno />}/>
           <Route path="/kanban/YouthVibes" element={<KanbanYV />}/>
+          <Route path="/documentupload/BusinessSquad" element={<DocumentUploadBS />}/>
+          <Route path="/documentupload/Cognizance" element={<DocumentUploadCog />}/>
+          <Route path="/documentupload/Communiqa" element={<DocumentUploadComm />}/>
+          <Route path="/documentupload/EcoBiz" element={<DocumentUploadEB />}/>
+          <Route path="/documentupload/Graffiti" element={<DocumentUploadG />}/>
+          <Route path="/documentupload/IgnitedMinds" element={<DocumentUploadIG />}/>
+          <Route path="/documentupload/KhelRatna" element={<DocumentUploadKR />}/>
+          <Route path="/documentupload/MarketMavens" element={<DocumentUploadMar />}/>
+          <Route path="/documentupload/MoneyMatrix" element={<DocumentUploadMon />}/>
+          <Route path="/documentupload/Navrang" element={<DocumentUploadN />}/>
+          <Route path="/documentupload/Pixels" element={<DocumentUploadPix />}/>
+          <Route path="/documentupload/Prayaas" element={<DocumentUploadPra />}/>
+          <Route path="/documentupload/Synchronize" element={<DocumentUploadSync />}/>
+          <Route path="/documentupload/Techno" element={<DocumentUploadTechno />}/>
+          <Route path="/documentupload/YouthVibes" element={<DocumentUploadYV />}/>
+          <Route path="/documentupload" element={<DropZoneCombined socketForFiles={socketForFiles} />}/>
+          <Route path="/files/:sessionKey" element={<FileListPage socketForFiles={socketForFiles} />}/>
+
+
         </Routes>
       </Router>
     </div>

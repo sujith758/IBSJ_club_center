@@ -1,5 +1,4 @@
-import React from "react";
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
 import { v4 as uuidv4 } from "uuid";
 import useLocalStorage from "use-local-storage";
@@ -7,17 +6,13 @@ import "./Kanban.css";
 import Navbar from "./Navbar/Navbar";
 import Board from "./Board/Board";
 import Editable from "./Editable/Editable";
-import "../../bootstrap.css";
 import { io } from "socket.io-client";
 
+const socket = io(`http://localhost:3001`);
 
 function Kanban({ sessionKey }) {
-  const socket = io(`https://master--snazzy-narwhal-9642ee.netlify.app/#/kanban/?session=${sessionKey}`);
-
   const sessionDataKey = `kanban-board-${sessionKey}`;
   const [data, setData] = useLocalStorage(sessionDataKey, []);
-  const [refresh, setRefresh] = useState(false);
-
   useEffect(() => {
     const storedData = localStorage.getItem(sessionDataKey);
     if (storedData) {
@@ -25,37 +20,41 @@ function Kanban({ sessionKey }) {
     }
   }, [sessionDataKey, setData]);
 
+  const emitDataToServer = () => {
+    // Emit the current data to the server through the socket connection
+    socket.emit("update_data_text", { sessionKey, data });
+  };
+
   useEffect(() => {
-    
-    const handleBroadcastedData = (broadcastedData) => {
-      // Update the local state
-      setData(broadcastedData);
-    
-      // Update local storage
-      localStorage.setItem(sessionDataKey, JSON.stringify(broadcastedData));
-    
-      console.log("Received broadcasted data:", broadcastedData);
-    
-      // Trigger a refresh by toggling the refresh state
-      setRefresh((prevRefresh) => !prevRefresh);
-    };
+    const socket = io(`http://localhost:3001`);
 
-    socket.on("kanban_data_broadcast", handleBroadcastedData);
+    // Join the room corresponding to the sessionKey
+    socket.emit("join_room", sessionKey);
+    socket.on(`recieve_data_text_${sessionKey}`, (recievedData) => {
+      console.log("Data recieved from the server!", recievedData);
+      setData(recievedData);
+    });
+  }, [sessionKey, socket]);
 
-    return () => {
-      socket.off("kanban_data_broadcast", handleBroadcastedData);
-    };
-  }, [setData, sessionDataKey, socket, refresh]);
-
-  const handleUpdateButtonClick = () => {
-    console.log("Emitting updated data:", data);
-    socket.emit("kanban_data_updated", { sessionKey, data });
+  const onCardDateChange = (boardId, cardId, date) => {
+    const formattedDate = date.toLocaleDateString("en-GB");
+    const updatedData = data.map((board) => {
+      if (board.id === boardId) {
+        const updatedCard = board.card.map((card) =>
+          card.id === cardId ? { ...card, selectedDate: formattedDate } : card
+        );
+        return { ...board, card: updatedCard };
+      }
+      return board;
+    });
+    setData(updatedData);
   };
 
   const onDragEnd = (result) => {
     const { source, destination } = result;
     if (!destination) return;
     if (source.droppableId === destination.droppableId) return;
+
     const updatedData = dragCardInBoard(source, destination);
     setData(updatedData);
   };
@@ -85,12 +84,15 @@ function Kanban({ sessionKey }) {
     setData(updatedData);
   };
 
-  const addCard = (title, bid) => {
+  const addCard = (title, bid, selectedDate) => {
     const updatedData = data.map((item) =>
       item.id === bid
         ? {
             ...item,
-            card: [...item.card, { id: uuidv4(), title, tags: [], task: []}],
+            card: [
+              ...item.card,
+              { id: uuidv4(), title, tags: [], task: [], selectedDate: null },
+            ],
           }
         : item
     );
@@ -107,7 +109,10 @@ function Kanban({ sessionKey }) {
   };
 
   const addBoard = (title) => {
-    const updatedData = [...data, { id: uuidv4(), boardName: title, card: [] }];
+    const updatedData = [
+      ...data,
+      { id: uuidv4(), boardName: title, card: [] },
+    ];
     setData(updatedData);
   };
 
@@ -117,25 +122,26 @@ function Kanban({ sessionKey }) {
   };
 
   return (
-    
     <>
       <DragDropContext onDragEnd={onDragEnd}>
         <div className="App">
-          <Navbar resetData={() => setData([])} />
+        <Navbar
+            resetData={() => setData([])}
+            emitDataToServer={emitDataToServer} 
+          />
           <div className="app_outer">
             <div className="app_boards">
-              {data.map((item) => (
+              {data && data.map((item) => (
                 <Board
                   key={item.id}
                   id={item.id}
                   name={item.boardName}
                   card={item.card}
                   setName={setName}
-                  addCard={addCard}
+                  addCard={(title, bid, selectedDate) => addCard(title, bid, selectedDate)}
                   removeCard={removeCard}
                   removeBoard={removeBoard}
-                  
-
+                  onCardDateChange={onCardDateChange} // Pass the date change handler to Board component
                 />
               ))}
               <Editable
@@ -149,7 +155,7 @@ function Kanban({ sessionKey }) {
           </div>
         </div>
       </DragDropContext>
-      <button onClick={handleUpdateButtonClick}>Update Data</button>
+      
     </>
   );
 }

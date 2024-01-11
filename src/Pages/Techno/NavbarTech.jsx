@@ -14,6 +14,9 @@ const NavbarTech = () => {
               Kanban
             </Link>
           </li>
+          <li>
+          <Link to='/documentupload/Techno'>Dropzone</Link>
+          </li>
         </ul>
       </div>
     </div>
