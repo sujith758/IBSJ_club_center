@@ -3,62 +3,13 @@ import React, { useState, useEffect } from 'react';
 import NavbarBS from './NavbarBS';
 
 const BusinessSquad = ({ socketForFiles, sessionKey }) => {
-  const [acceptedDocuments, setAcceptedDocuments] = useState(
-    JSON.parse(localStorage.getItem(`acceptedDocuments_${sessionKey}`)) || []
-  );
-
-  useEffect(() => {
-    const socket = socketForFiles;
-
-    console.log('Current sessionKey:', sessionKey);
-    console.log('Current acceptedDocuments state:', acceptedDocuments);
-
-    if (!socket.connected) {
-      socket.connect();
-      console.log('Reconnecting to socket server.');
-    }
-
-    socket.on('connect', () => {
-      console.log('Connected to socket server.');
-    });
-
-    socket.emit('join_room', sessionKey);
-
-    socket.on(`file_accepted_${sessionKey}`, (data) => {
-      console.log(`Received file_accepted event:`, data);
-
-      const documentName = data && data.documentName;
-
-      if (documentName && !acceptedDocuments.includes(documentName)) {
-        setAcceptedDocuments((prevAccepted) => {
-          const updatedDocuments = [...prevAccepted, documentName];
-
-          // Save updatedDocuments to local storage
-          localStorage.setItem(`acceptedDocuments_${sessionKey}`, JSON.stringify(updatedDocuments));
-
-          return updatedDocuments;
-        });
-      }
-    });
-
-    return () => {
-      console.log('Cleaning up socket connection.');
-      socket.off(`file_accepted_${sessionKey}`);
-      socket.off('connect');
-
-      if (!socket.connected) {
-        socket.disconnect();
-        console.log('Socket disconnected.');
-      }
-    };
-  }, [socketForFiles, sessionKey, acceptedDocuments]);
+  const [acceptedDocuments, setAcceptedDocuments] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleReset = () => {
-    // Clear local storage
-    localStorage.removeItem(`acceptedDocuments_${sessionKey}`);
-    // Clear state
     setAcceptedDocuments([]);
-    socketForFiles.emit('delete_all_files', { sessionKey });
+    localStorage.removeItem(`acceptedDocuments_${sessionKey}`);
+
     fetch(`http://localhost:3001/deleteFiles/${sessionKey}`, {
       method: 'POST',
     })
@@ -67,16 +18,51 @@ const BusinessSquad = ({ socketForFiles, sessionKey }) => {
       .catch(error => console.error('Error deleting files:', error));
   };
 
+  useEffect(() => {
+    const storedData = JSON.parse(localStorage.getItem(`acceptedDocuments_${sessionKey}`));
+    if (storedData) {
+      setAcceptedDocuments(storedData);
+      setIsLoading(false);
+    }
+  }, [sessionKey]);
+
+  useEffect(() => {
+    const fetchAcceptedDocuments = async () => {
+      try {
+        const response = await fetch(`http://localhost:3001/files/${sessionKey}/accepted`);
+        if (!response.ok) {
+          throw new Error(`Failed to fetch accepted documents. Status: ${response.status}`);
+        }
+
+        const acceptedDocumentsDataOut = await response.json();
+        setAcceptedDocuments(acceptedDocumentsDataOut);
+        localStorage.setItem(`acceptedDocuments_${sessionKey}`, JSON.stringify(acceptedDocumentsDataOut));
+        setIsLoading(false);
+      } catch (error) {
+        console.error('Error fetching accepted documents:', error.message);
+      }
+    };
+
+    fetchAcceptedDocuments();
+  }, [sessionKey]);
+
   return (
     <div>
-      <NavbarBS onReset={handleReset}/>
+      <NavbarBS onReset={handleReset} />
 
       <h2>Accepted Documents:</h2>
-      <ul>
-        {acceptedDocuments.map((documentName, index) => (
-          <li key={index}>{documentName}</li>
-        ))}
-      </ul>
+      {isLoading ? (
+        <p>No files</p>
+      ) : (
+        <ul>
+          {acceptedDocuments.map((document, index) => (
+            <li key={index}>
+              <p>Name: {document.file_name}</p>
+              <p>Status: {document.status}</p>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };
