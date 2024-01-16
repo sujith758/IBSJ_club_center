@@ -55,7 +55,7 @@ import DocumentUploadTechno from "./Pages/Techno/DocumentUploadTechno";
 import DocumentUploadYV from "./Pages/YouthVibes/DocumentUploadYV";
 import DropZoneCombined from "./Pages/DeansCorner/DropZoneCombined/DropZoneCombined";
 import FileListPage from "./Pages/DeansCorner/DropZoneCombined/FileListPage";
-
+import EventCalendar from "../components/EventCalendar/EventCalendar";
 
 
 const LargeScreenContent = () => {
@@ -113,6 +113,7 @@ const App = () => {
           />
           <Route path="/deanscorner" element={<DeansCorner socketForFiles={socketForFiles} />}/>
           <Route path="/aboutus" element={<AboutUs />}/>
+          <Route path="/eventcalendar" element={<EventCalendar />}/>
           <Route path="/businesssquad" element={<BusinessSquad socketForFiles={socketForFiles} sessionKey='BusinessSquad'/>}/>
           <Route path="/cognizance" element={<Cognizance socketForFiles={socketForFiles} sessionKey='Cognizance'/>}/>
           <Route path="/communiqa" element={<Communiqa socketForFiles={socketForFiles} sessionKey='Communiqa'/>}/>
@@ -163,8 +164,6 @@ const App = () => {
           <Route path="/documentupload/YouthVibes" element={<DocumentUploadYV />}/>
           <Route path="/documentupload" element={<DropZoneCombined socketForFiles={socketForFiles} />}/>
           <Route path="/files/:sessionKey" element={<FileListPage socketForFiles={socketForFiles} />}/>
-
-
         </Routes>
       </Router>
     </div>

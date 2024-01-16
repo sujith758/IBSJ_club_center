@@ -22,6 +22,11 @@ const NavbarHP = () => {
               Dean's Corner
             </Link>
           </li>
+          <li>
+            <Link className="navbar_link" to="/eventcalendar">
+              Event Calendar
+            </Link>
+          </li>
         </ul>
       </div>
     </div>

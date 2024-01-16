@@ -211,6 +211,126 @@ app.get("/files/:sessionKey", async (req, res) => {
   }
 });
 
+const insertEvent = async (title, event_date) => {
+  const client = await pool.connect();
+
+  try {
+    await client.query('BEGIN');
+
+    const queryText = 'INSERT INTO events(title,event_date,created_at) VALUES($1, $2, $3) RETURNING *';
+    const values = [title, event_date, new Date()];
+    const result = await client.query(queryText, values);
+
+    await client.query('COMMIT');
+
+    // Return the inserted event
+    return result.rows[0];
+  } catch (error) {
+    await client.query('ROLLBACK');
+    console.error('Error during event insertion:', error);
+    throw error;
+  } finally {
+    client.release();
+  }
+};
+
+
+// Function to update event data in PostgreSQL database
+const updateEvent = async (eventId, title) => {
+  const client = await pool.connect();
+
+  try {
+    await client.query('BEGIN');
+
+    const queryText = 'UPDATE events SET title = $1 WHERE id = $2';
+    const values = [title, eventId];
+    await client.query(queryText, values);
+
+    await client.query('COMMIT');
+  } catch (error) {
+    await client.query('ROLLBACK');
+    console.error('Error during event update:', error);
+    throw error;
+  } finally {
+    client.release();
+  }
+};
+
+// Function to delete event data from PostgreSQL database
+const deleteEvent = async (eventId) => {
+  const client = await pool.connect();
+
+  try {
+    await client.query('BEGIN');
+
+    const queryText = 'DELETE FROM events WHERE id = $1';
+    const values = [eventId];
+    await client.query(queryText, values);
+
+    await client.query('COMMIT');
+  } catch (error) {
+    await client.query('ROLLBACK');
+    console.error('Error during event deletion:', error);
+    throw error;
+  } finally {
+    client.release();
+  }
+};
+
+app.post("/events", express.json(), async (req, res) => {
+  const { title, event_date } = req.body;
+
+  try {
+    await insertEvent(title, event_date);
+    res.status(200).json({ success: true });
+  } catch (error) {
+    console.error("Failed to insert event. Error:", error.message);
+    res.status(500).json({ success: false, error: "Internal Server Error" });
+  }
+});
+
+app.put("/events/:eventId", express.json(), async (req, res) => {
+  const eventId = req.params.eventId;
+  const { title } = req.body;
+
+  try {
+    await updateEvent(eventId, title);
+    res.status(200).json({ success: true });
+  } catch (error) {
+    console.error("Failed to update event. Error:", error.message);
+    res.status(500).json({ success: false, error: "Internal Server Error" });
+  }
+});
+
+app.get("/events", async (req, res) => {
+  try {
+    const client = await pool.connect();
+
+    // Query to fetch events from the database
+    const result = await client.query('SELECT * FROM events');
+    const events = result.rows;
+
+    client.release();
+
+    res.json(events);
+  } catch (error) {
+    console.error("Error fetching events:", error.message);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+app.delete("/events/:eventId", async (req, res) => {
+  const eventId = req.params.eventId;
+
+  try {
+    await deleteEvent(eventId);
+    res.status(200).json({ success: true });
+  } catch (error) {
+    console.error("Failed to delete event. Error:", error.message);
+    res.status(500).json({ success: false, error: "Internal Server Error" });
+  }
+});
+
 app.use("/public", express.static(path.join(__dirname, "public")));
 
 
