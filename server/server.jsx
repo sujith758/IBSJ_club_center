@@ -102,21 +102,25 @@ io.on("connection", (socket) => {
 });
 
 app.post("/insertAcceptedFile", express.json(), async (req, res) => {
-  const { sessionKey, acceptedDocumentNameIn } = req.body;
+  const { sessionKey, acceptedDocumentNameIn, status } = req.body;
 
   try {
-    // Call the function to insert accepted file data into the PostgreSQL database
-    await insertAcceptedFile(sessionKey, acceptedDocumentNameIn, 'Accepted');
-    await insertAcceptedFile(sessionKey, acceptedDocumentNameIn, 'Rejected');
+    // Check the provided status and insert accordingly
+    if (status === 'Accepted' || status === 'Rejected') {
+      // Call the function to insert accepted file data into the PostgreSQL database
+      await insertAcceptedFile(sessionKey, acceptedDocumentNameIn, status);
 
-
-    // Send a success response back to the client
-    res.status(200).json({ success: true });
+      // Send a success response back to the client
+      res.status(200).json({ success: true });
+    } else {
+      res.status(400).json({ success: false, error: "Invalid status provided" });
+    }
   } catch (error) {
     console.error("Failed to insert accepted file. Error:", error.message);
     res.status(500).json({ success: false, error: "Internal Server Error" });
-  } 
+  }
 });
+
 app.get("/files/:sessionKey/accepted", async (req, res) => {
   const sessionKey = req.params.sessionKey;
 

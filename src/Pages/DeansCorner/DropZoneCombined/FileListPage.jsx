@@ -62,50 +62,62 @@ const FileListPage = ({ socketForFiles }) => {
  
 
   const handleAccept = async (file) => {
-    // Emit the event to the server after the state is updated
-    socket.emit('accept_document', { sessionKey, documentName: file.name });
-  
     try {
+      // Check if the file is already accepted
+      if (acceptedDocuments.includes(file.name)) {
+        console.log(`File '${file.name}' is already accepted.`);
+        return; // Don't proceed further if the file is already accepted
+      }
+  
+      // Emit the event to the server after the state is updated
+      socket.emit('accept_document', { sessionKey, documentName: file.name });
+  
       // Insert data into PostgreSQL database
       console.log('Inserting accepted file into the database...');
       console.log('Session key:', sessionKey);
       console.log('File name:', file.name);
-      await insertAcceptedFile(sessionKey, file.name, 'Accepted');
   
       // Update the state to mark the file as accepted
       setAcceptedDocuments((prevAccepted) => [...prevAccepted, file.name]);
   
-      // Save updatedDocuments to local storage
+      // Save updatedDocuments to local storage using the updated state directly
       localStorage.setItem(`acceptedDocuments_${sessionKey}`, JSON.stringify([...acceptedDocuments, file.name]));
+  
+      // Perform the actual insertion with 'Accepted' as the status
+      await insertAcceptedFile(sessionKey, file.name, 'Accepted');
     } catch (error) {
       console.error('Error during file acceptance:', error.message);
     }
   };
   
-  
-
   const handleReject = async (file) => {
     try {
+      // Check if the file is already accepted
+      if (acceptedDocuments.includes(file.name)) {
+        console.log(`File '${file.name}' is already accepted, so it won't be rejected.`);
+        return; // Don't proceed further if the file is already accepted
+      }
+  
       // Assuming you have a server endpoint to delete the file
       const deleteResponse = await fetch(`http://localhost:3001/deleteFile/${sessionKey}/${file.name}`, {
         method: 'DELETE',
       });
-
+  
       if (!deleteResponse.ok) {
         throw new Error(`Failed to delete file. Status: ${deleteResponse.status}`);
       }
-
+  
       console.log(`Rejected and deleted: ${file.name}`);
-      await insertAcceptedFile(sessionKey, file.name, 'Rejected');
-
-
+  
       // Update the state to remove the rejected file
       setFiles((prevFiles) => prevFiles.filter((prevFile) => prevFile.name !== file.name));
+  
+      // Perform the actual insertion with 'Rejected' as the status
+      await insertAcceptedFile(sessionKey, file.name, 'Rejected');
     } catch (error) {
-      console.error('Error during file deletion:', error.message);
+      console.error('Error during file rejection:', error.message);
     }
   };
-
   return (
     <div>
       <h2>Files for Session Key: {sessionKey}</h2>
