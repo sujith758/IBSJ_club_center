@@ -1,0 +1,32 @@
+.homepage_title {
+  height: calc(100vh - 70px);
+  text-align: center;
+  background-color: white;
+}
+
+.homepage_title h1 {
+  font-weight: bolder;
+  transform: translate(0, 45px);
+  font-size: 11rem;
+  text-shadow: -5px 8px 8px rgba(0, 0, 0, 0.2);
+  transition: text-shadow 0.3s ease;
+  background-image: url("../../Assets/Mosiac_FHD.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: bottom;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  transition: background 1s ease; /* Added ease effect to the background transition */
+}
+
+.homepage_title h1:hover {
+  background-image: url("../../Assets/Mosiac_FHD.jpg");
+  background-position: top;
+  cursor: default;
+}
+
+.homepage_title:hover h1 {
+  background-position: left; /* Adjusted background position to revert to the original state */
+  transition: background 0.5s ease; /* Added ease effect to smoothly transition back */
+}

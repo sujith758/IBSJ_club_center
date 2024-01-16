@@ -1,17 +1,50 @@
 import React from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import NavbarHP from "./Navbar/NavbarHP";
-import ecobizlogo from "../../Assets/EcoBiz.png"
+import "./Homepage.css"
+import gsap from "gsap";
 
 const Homepage = () => {
+  useEffect(() => {
+    gsap.registerPlugin(window.DrawSVGPlugin);
+
+    gsap.from(".homepage_title h1:nth-child(1)", {
+      duration: 1,
+      x: -500,
+      opacity: 0,
+      ease: "power3.inOut",
+    });
+
+    gsap.from(".homepage_title h1:nth-child(2)", {
+      duration: 1,
+      x: +500,
+      opacity: 0,
+      ease: "power3.inOut",
+    });
+
+    gsap.to(".homepage_title h1", {
+      duration: 1,
+      x: 0,
+      delay: 0,
+      opacity: 1,
+    });
+  }, []);
+
+
+
   return (
     <div className="homepage__div">
       <NavbarHP />
+      
+      <div className="homepage_title">
+        <h1>IBS JAIPUR</h1>
+        <h1>CLUB CENTER</h1>
+      </div>
       <ul className="homepage">
         <li>
           <Link className="link_text" to="/businesssquad">
-            <img src={ecobizlogo} alt="ecobiz logo" />
-          
+            Business Squad
           </Link>
         </li>
         <li>

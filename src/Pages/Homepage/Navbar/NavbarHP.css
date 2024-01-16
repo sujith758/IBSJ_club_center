@@ -1,0 +1,70 @@
+.navbar_homepage {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* padding: 10px; */
+  background-color: antiquewhite;
+  height: 70px;
+}
+.navbar_image img {
+  width: 100px;
+}
+
+.navbar_image {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 230px;
+  margin-left: 25px;
+}
+
+.navbar_image p {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-left: 10px;
+  padding-top: 15px;
+}
+
+.navbar_content {
+  margin-top: 15px;
+  margin-right: 25px;
+}
+.navbar_content ul {
+  list-style: none;
+  display: flex;
+  gap: 50px; /* Adjusted gap */
+  padding: 10px 15px;
+  border-radius: 15px;
+  background-color: gray;
+}
+
+.navbar_content ul li {
+  margin: 0;
+  position: relative; /* Added position */
+}
+
+.navbar_content ul li a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+  position: relative; /* Added position */
+}
+
+.navbar_content ul li a::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px; /* Adjust the height of the line as needed */
+  background-color: white; /* Adjust the color of the line */
+  transform: scaleX(0); /* Initial state - line is not visible */
+  transform-origin: left;
+  transition: transform 0.3s ease; /* Smooth transition effect */
+}
+
+.navbar_content ul li a:hover::before {
+  transform: scaleX(1); /* When hovering, extend the line */
+}
