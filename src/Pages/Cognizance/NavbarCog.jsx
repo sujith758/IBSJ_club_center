@@ -1,7 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 
-const NavbarCog = () => {
+const NavbarCog = ({onReset}) => {
+  const handleResetClick = () => {
+    const isConfirmed = window.confirm('Are you sure you want to reset the data?');
+    if (isConfirmed) {
+      onReset(); // Call the provided callback function for reset
+    }
+  };
  
   return (
     <div>
@@ -17,6 +23,9 @@ const NavbarCog = () => {
           <Link to='/documentupload/Cognizance'>Dropzone</Link>
           </li>
         </ul>
+        <button onClick={handleResetClick} className="reset-button">
+              Reset
+            </button>
       </div>
     </div>
   )
