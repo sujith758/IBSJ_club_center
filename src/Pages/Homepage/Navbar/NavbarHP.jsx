@@ -8,8 +8,8 @@ const NavbarHP = () => {
     <div className="navbar_homepage">
       <div className="navbar_image">
         <img src={uniLogo} alt="logo of the University" />
+        <div className="vertical_line"></div>
         <p>IBS Jaipur Club Center</p>
-      <p></p>
       </div>
       
       <div className="navbar_content">

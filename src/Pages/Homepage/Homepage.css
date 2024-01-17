@@ -1,32 +1,76 @@
+.homepage__div{
+  height: 100vh;
+}
 .homepage_title {
-  height: calc(100vh - 70px);
+  padding: 20px 10px;
+  height: 130px;
   text-align: center;
   background-color: white;
 }
+.homepage_title h1{
+  font-size: 5.5rem;
+  font-weight: 900;
+  line-height: 1em;
+  color: transparent;
+  -webkit-text-stroke: 2px rebeccapurple;
+  margin-bottom: -95px;
+}
 
-.homepage_title h1 {
+
+.homepage_title h2 {
   font-weight: bolder;
   transform: translate(0, 45px);
-  font-size: 11rem;
+  font-size: 5.5rem;
   text-shadow: -5px 8px 8px rgba(0, 0, 0, 0.2);
   transition: text-shadow 0.3s ease;
-  background-image: url("../../Assets/Mosiac_FHD.jpg");
+  background-image: url("../../Assets/pexels-felix-mittermeier-956999.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: bottom;
+  background-position: center;
   color: transparent;
   background-clip: text;
   -webkit-background-clip: text;
   transition: background 1s ease; /* Added ease effect to the background transition */
 }
 
-.homepage_title h1:hover {
-  background-image: url("../../Assets/Mosiac_FHD.jpg");
-  background-position: top;
+/* .homepage_title h2:hover {
+  background-image: url("../../Assets/pexels-bubi-bubi-2644734.jpg");
+  background-position: center;
   cursor: default;
 }
 
-.homepage_title:hover h1 {
-  background-position: left; /* Adjusted background position to revert to the original state */
-  transition: background 0.5s ease; /* Added ease effect to smoothly transition back */
+.homepage_title:hover h2 {
+  background-position: left;
+  transition: background 0.5s ease;
+} */
+
+.homepage_content {
+  
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
+.homepage_content ul img {
+  width: 100px;
+  /* border-radius: 70px; */
+  object-fit: cover; 
+  object-position: center; 
+  
+}
+
+.homepage_content ul{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  text-align: center;
+  gap: 30px;
+  width: 100%;
+ 
+}
+
+.homepage_content ul li{
+  
+ list-style: none;
+}
+

@@ -14,7 +14,7 @@ app.use(cors());
 
 const io = new Server(httpServer, {
   cors: {
-    origin: "http://localhost:3000", // Replace with your client's origin
+    origin: "https://master--snazzy-narwhal-9642ee.netlify.app/:80", // Replace with your client's origin
     methods: ["GET", "POST"],
   },
 });

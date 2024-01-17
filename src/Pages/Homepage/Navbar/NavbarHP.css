@@ -3,11 +3,11 @@
   justify-content: space-between;
   align-items: center;
   /* padding: 10px; */
-  background-color: antiquewhite;
-  height: 70px;
+  background-color: #fcb3a6;
+  height: 60px;
 }
 .navbar_image img {
-  width: 100px;
+  width: 80px;
 }
 
 .navbar_image {
@@ -15,16 +15,25 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  width: 230px;
+  width: 220px;
   margin-left: 25px;
 }
 
 .navbar_image p {
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: bold;
   margin-left: 10px;
-  padding-top: 15px;
+  padding-top: 18px;
 }
+
+.vertical_line {
+  /* position: absolute; */
+  height: 40px;
+  width: 2px;
+  background-color: black;
+  margin-left: 10px;
+  z-index: 100;
+  }
 
 .navbar_content {
   margin-top: 15px;
@@ -34,9 +43,9 @@
   list-style: none;
   display: flex;
   gap: 50px; /* Adjusted gap */
-  padding: 10px 15px;
-  border-radius: 15px;
-  background-color: gray;
+  padding: 5px 15px;
+  border-radius: 10px;
+  background-color: rgb(202, 151, 151);
 }
 
 .navbar_content ul li {
@@ -46,7 +55,7 @@
 
 .navbar_content ul li a {
   text-decoration: none;
-  color: black;
+  color: #171628;
   font-weight: bold;
   cursor: pointer;
   position: relative; /* Added position */
@@ -61,7 +70,7 @@
   height: 2px; /* Adjust the height of the line as needed */
   background-color: white; /* Adjust the color of the line */
   transform: scaleX(0); /* Initial state - line is not visible */
-  transform-origin: left;
+  transform-origin: center;
   transition: transform 0.3s ease; /* Smooth transition effect */
 }
 
