@@ -3,9 +3,11 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import NavbarHP from "./Navbar/NavbarHP";
 import "./Homepage.css";
-import ScrollMenu from "./ScrollMenu/ScrollMenu";
+// import ScrollMenu from "./ScrollMenu/ScrollMenu";
 import gsap from "gsap";
-import Footer from "./Footer/Footer";
+// import Footer from "./Footer/Footer";
+import RandomizedList from "./RandomList/RandomList";
+import CollegeFrom from "../../Assets/CollegeFront.jpg";
 // import BSLogo from "../../Assets/clublogos/Business Squad.jpg";
 // import CogLogo from "../../Assets/clublogos/Cognizance.jpg";
 // import CommLogo from "../../Assets/clublogos/Communiqua.jpg";
@@ -28,13 +30,10 @@ const Homepage = () => {
 
     gsap.from(".homepage_title h1", {
       duration: 0.5,
-      y: -400,
+      x: -400,
       opacity: 0,
       ease: "power3.inOut",
     });
-
-    
-   
 
     gsap.from(".homepage_title h2", {
       duration: 0.5,
@@ -51,8 +50,6 @@ const Homepage = () => {
       opacity: 1,
     });
 
-   
-
     gsap.to(".homepage_title h2", {
       duration: 0.5,
       x: 0,
@@ -65,12 +62,14 @@ const Homepage = () => {
   return (
     <div className="homepage__div">
       <NavbarHP />
+      <img src={CollegeFrom} alt="College Front" className="homepage_image" />
       <div className="homepage_title">
         <h1>IBS JAIPUR CLUB CENTER</h1>
         <h2>IBS JAIPUR CLUB CENTER</h2>
       </div>
-      <ScrollMenu />
-      <Footer />
+      <RandomizedList />
+      {/* <ScrollMenu /> */}
+      {/* <Footer /> */}
     </div>
   );
 };

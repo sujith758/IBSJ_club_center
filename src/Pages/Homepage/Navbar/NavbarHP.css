@@ -3,7 +3,7 @@
   justify-content: space-between;
   align-items: center;
   /* padding: 10px; */
-  background-color: #fcb3a6;
+  background-color: #ECBE9C;
   height: 60px;
 }
 .navbar_image img {
@@ -45,7 +45,7 @@
   gap: 50px; /* Adjusted gap */
   padding: 5px 15px;
   border-radius: 10px;
-  background-color: rgb(202, 151, 151);
+  background-color: #e9dfd8;
 }
 
 .navbar_content ul li {
@@ -68,7 +68,7 @@
   right: 0;
   bottom: 0;
   height: 2px; /* Adjust the height of the line as needed */
-  background-color: white; /* Adjust the color of the line */
+  background-color: rgb(20, 20, 20); /* Adjust the color of the line */
   transform: scaleX(0); /* Initial state - line is not visible */
   transform-origin: center;
   transition: transform 0.3s ease; /* Smooth transition effect */

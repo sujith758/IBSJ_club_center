@@ -1,0 +1,23 @@
+.randomized-element {
+  position: relative;
+  margin: 0px 65px;
+  width: 90%;
+  height: calc(100vh - 180px);
+
+}
+
+.randomized-element-item {
+  position: absolute;
+  cursor: pointer;
+  font-size: 2rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  pointer-events: all;
+
+}
+
+.randomized-element-item a{
+  color: #2E3093;
+  text-decoration: none;
+}
+

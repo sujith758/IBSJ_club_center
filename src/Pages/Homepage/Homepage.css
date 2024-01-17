@@ -1,9 +1,22 @@
 .homepage__div{
+  width: 100%;
   height: 100vh;
 }
+
+.homepage_image{
+  position: absolute;
+  object-fit: cover;
+  height: calc(100vh - 60px);
+  width: 100%;
+  opacity: 0.75;
+  filter: blur(2px);
+  -webkit-filter: blur(2px)
+}
+
+
 .homepage_title {
-  padding: 20px 10px;
-  height: 130px;
+  padding: 5px 10px;
+  height: 110px;
   text-align: center;
   background-color: white;
 }
@@ -12,7 +25,7 @@
   font-weight: 900;
   line-height: 1em;
   color: transparent;
-  -webkit-text-stroke: 2px rebeccapurple;
+  -webkit-text-stroke: 2px black;
   margin-bottom: -95px;
 }
 
@@ -23,10 +36,10 @@
   font-size: 5.5rem;
   text-shadow: -5px 8px 8px rgba(0, 0, 0, 0.2);
   transition: text-shadow 0.3s ease;
-  background-image: url("../../Assets/pexels-felix-mittermeier-956999.jpg");
+  /* background-image: url("../../Assets/lpp1039.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center;
+  background-position: center; */
   color: transparent;
   background-clip: text;
   -webkit-background-clip: text;
