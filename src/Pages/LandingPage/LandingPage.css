@@ -1,8 +1,7 @@
-body {
-  overflow: hidden;
-}
+
 
 .landing-page {
+  overflow: hidden;
   background-color: #257878;
   color: white;
   height: 100vh;
@@ -44,7 +43,7 @@ body {
 
 .count-up-text {
   position: fixed;
-  top: 120px;
+  top: 125px;
   left: 550px;
   margin-top: 40px;
   font-size: 7rem;

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import gsap from "gsap";
 
 import "./Homepage.css";
-// import ScrollMenu from "./ScrollMenu/ScrollMenu";
+import ScrollMenu from "./ScrollMenu/ScrollMenu";
 import NavbarHP from "./Navbar/NavbarHP";
 
 // import Footer from "./Footer/Footer";
@@ -52,9 +52,8 @@ const Homepage = () => {
       <NavbarHP />
       <div className="homepage_title">
         <h1>IBS JAIPUR CLUB CENTER</h1>
-        <h2>IBS JAIPUR CLUB CENTER</h2>
       </div>
-   
+      <ScrollMenu />
     </div>
   );
 };

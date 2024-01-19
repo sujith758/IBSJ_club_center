@@ -1,42 +1,69 @@
-/* ScrollMenu.css */
+.p-section{
+  padding: 10px 20px;
+}
+.link-list{
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 100%;
+}
 
-.scroll-menu-container {
-  height: calc(100vh - 215px);
-  width: 100%;
+.heading-motion{
+  position: relative;
   display: flex;
-  justify-content: space-evenly;
   align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid black;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  height: 120px;
 }
 
-.scroll-menu {
-  text-align: center;
-  width: 50%;
-  overflow-y: scroll;
-  max-height: 70vh; 
+.heading-container:hover .heading-motion,
+  .heading-container:hover .span-motion {
+    background-color: #257878;
+    color: white;
+  }
+.span-motion{
+  position: relative;
+  z-index: 10;
+  display: block;
+  font-size: 3rem;
+  font-weight: 700;
+  color: #257878;
 }
 
-.scroll-menu ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.heading-split{
+  display: inline-block;
 }
 
-.scroll-menu ul li {
-  font-size: 2.5rem; /* Adjust the font size as needed */
-  padding: 10px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+
+.sub-heading-motion{
+  position: relative;
+  z-index: 10;
+  margin-top: 0.5rem;
+  display: inline-block;
+  font-size: 1.125rem;
+  color: #000000;
 }
 
-.scroll-menu ul li:hover {
-  background-color: #eee; /* Highlight on hover */
+.image-motion{
+  position: absolute;
+  z-index: 0;
+  height: 6.2rem;
+  width: 8rem;
+  border-radius: 0.5rem;
+  object-fit: cover;
+  object-position: center;
 }
 
-.image-container {
-  text-align: center;
-  width: 50%;
+.div-motion{
+  position: relative;
+  z-index: 10;
+  padding: 1rem;
 }
 
-.image-container img {
-  width: 350px;
+.arrow-motion{
+  font-size: 2.25rem;
+  color: #FF6F5B;
+
 }
