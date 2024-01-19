@@ -56,12 +56,13 @@ import DocumentUploadYV from "./Pages/YouthVibes/DocumentUploadYV";
 import DropZoneCombined from "./Pages/DeansCorner/DropZoneCombined/DropZoneCombined";
 import FileListPage from "./Pages/DeansCorner/DropZoneCombined/FileListPage";
 import EventCalendar from "../components/EventCalendar/EventCalendar";
+import LandingPage from "./Pages/LandingPage/LandingPage";
 
 
 const LargeScreenContent = () => {
   return (
     <div>
-      <Homepage />
+      <LandingPage />
     </div>
   );
 };
@@ -111,6 +112,8 @@ const App = () => {
               )
             }
           />
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/homepage" element={<Homepage />}/>
           <Route path="/deanscorner" element={<DeansCorner socketForFiles={socketForFiles} />}/>
           <Route path="/aboutus" element={<AboutUs />}/>
           <Route path="/eventcalendar" element={<EventCalendar />}/>

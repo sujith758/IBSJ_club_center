@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import uniLogo from "../../../Assets/IBS_Jaipur_logo.png"
+import uniLogo from "../../../public/IBS_Jaipur_logo.png"
 import "./NavbarHP.css";
 
 const NavbarHP = () => {

@@ -1,28 +1,16 @@
 import React from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import NavbarHP from "./Navbar/NavbarHP";
+import gsap from "gsap";
+
 import "./Homepage.css";
 // import ScrollMenu from "./ScrollMenu/ScrollMenu";
-import gsap from "gsap";
+import NavbarHP from "./Navbar/NavbarHP";
+
 // import Footer from "./Footer/Footer";
-import RandomizedList from "./RandomList/RandomList";
-import CollegeFrom from "../../Assets/CollegeFront.jpg";
-// import BSLogo from "../../Assets/clublogos/Business Squad.jpg";
-// import CogLogo from "../../Assets/clublogos/Cognizance.jpg";
-// import CommLogo from "../../Assets/clublogos/Communiqua.jpg";
-// import EcoLogo from "../../Assets/clublogos/EcoBiz.png";
-// import GraffitiLogo from "../../Assets/clublogos/Graffiti.jpg";
-// import IGLogo from "../../Assets/clublogos/IGNITED MINDS - LOGO.png";
-// import KRLogo from "../../Assets/clublogos/Khel Ratna.jpg";
-// import MarLogo from "../../Assets/clublogos/Market Mavens.jpg";
-// import MonLogo from "../../Assets/clublogos/Money Matrix Club.jpg";
-// import NavLogo from "../../Assets/clublogos/Navrang.jpg";
-// import PixLogo from "../../Assets/clublogos/Pixel Club.jpg";
-// import PraLogo from "../../Assets/clublogos/Prayaas.jpg";
-// import SyncLogo from "../../Assets/clublogos/syncHRonize.jpg";
-// import TechLogo from "../../Assets/clublogos/Techno Club.jpg";
-// import YVLogo from "../../Assets/clublogos/Youth Vibes.jpg";
+// import RandomizedList from "./RandomList/RandomList";
+// import CollegeFrom from "../../public/CollegeFront.jpg";
+
 
 const Homepage = () => {
   useEffect(() => {
@@ -62,14 +50,11 @@ const Homepage = () => {
   return (
     <div className="homepage__div">
       <NavbarHP />
-      <img src={CollegeFrom} alt="College Front" className="homepage_image" />
       <div className="homepage_title">
         <h1>IBS JAIPUR CLUB CENTER</h1>
         <h2>IBS JAIPUR CLUB CENTER</h2>
       </div>
-      <RandomizedList />
-      {/* <ScrollMenu /> */}
-      {/* <Footer /> */}
+   
     </div>
   );
 };
