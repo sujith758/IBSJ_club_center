@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { gsap } from "gsap";
-import { Link } from "react-router-dom"; // Import Link from react-router-dom
+import { Link } from "react-router-dom"; 
 import Lottie from "lottie-react";
 import CountUp from "react-countup";
 import LoadingSphere from "../../public/Loading Sphere.json";
