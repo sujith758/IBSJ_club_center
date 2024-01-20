@@ -1,29 +1,48 @@
-import React, { useState, useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { Link } from "react-router-dom"; 
+import React, { useRef, useLayoutEffect, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Lottie from "lottie-react";
-import CountUp from "react-countup";
-import LoadingSphere from "../../public/Loading Sphere.json";
+import { gsap, Power3 } from "gsap";
 import WavingHand from "../../public/WavingHand.json";
-import "./LandingPage.css";
 import MagicDots from "./MagicDots";
+import "./LandingPage.css";
 
 const LandingPage = () => {
-  const [showHeader, setShowHeader] = useState(false);
+  const bottomContainerRef = useRef(null);
+  const containerRef = useRef(null);
+
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
   const [displayText, setDisplayText] = useState("");
   const mouseCircleRef = useRef(null);
 
-  useEffect(() => {
-    if (showHeader) {
-      gsap.from(".header-container", {
+  useLayoutEffect(() => {
+    gsap.fromTo(
+      containerRef.current,
+      {
         opacity: 0,
-        y: -10,
-        duration: 0.8,
-        ease: "power3.out",
-      });
-    }
+        y: -1000,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 2,
+        ease: Power3.inOut,
+      }
+    );
+    gsap.from(bottomContainerRef.current.children, {
+      opacity: 0,
+      y: -100, // Adjust as needed
+      delay: 1,
+      duration: 1,
+      ease: Power3.out,
+    });
+    gsap.to(bottomContainerRef.current.children, {
+      opacity: 1,
+      y: 0, // Adjust as needed
+      delay: 1,
+      duration: 1,
+      ease: Power3.out,
+    });
 
     const handleMouseMove = (event) => {
       setMousePosition({ x: event.clientX, y: event.clientY });
@@ -41,8 +60,9 @@ const LandingPage = () => {
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
     };
-  }, [showHeader]);
+  }, []);
 
+    
   const handleMouseEnter = () => {
     setIsHovered(true);
     setDisplayText("ENTER"); // Set the text you want to display
@@ -52,7 +72,7 @@ const LandingPage = () => {
     setIsHovered(false);
     setDisplayText("");
   };
-
+  
   useEffect(() => {
     if (isHovered) {
       gsap.to(".mouse-circle", {
@@ -69,62 +89,55 @@ const LandingPage = () => {
     }
   }, [isHovered]);
 
+  // Render the rest of the elements once loading is complete
   return (
-    <div className="landing-page">
-      
+    <div ref={containerRef} className="landing-page">
       <div className="landing-page-logo">
         <img src="src/public/IBS_Jaipur_logo.png" alt="college logo" />
-        
       </div>
       <MagicDots className="magic-dots" />
-      {!showHeader ? (
-        <div className="count-up">
-          <div className="count-up-text">
-            <CountUp start={0} end={100} delay={0.7} useEasing={false} duration={5} onEnd={() => setShowHeader(true)}>
-              {({ countUpRef }) => (
-                <div>
-                  <span ref={countUpRef} />
-                </div>
-              )}
-            </CountUp>
-          </div>
-          <div className="loading-sphere">
-            <Lottie animationData={LoadingSphere} loop={true} />
-          </div>
-        </div>
-      ) : (
-        
-        <div className="header-container">
-        <Link to="/homepage" style={{ textDecoration: 'none', color: 'white' }}>
-          <h1 onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>IBS JAIPUR</h1>
+      <div className="header-container">
+        <Link to="/homepage" style={{ textDecoration: "none", color: "white" }}>
+          <h1 onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+            IBS JAIPUR
+          </h1>
         </Link>
-        <Link to="/homepage" style={{ textDecoration: 'none', color: 'white' }}>
-          <h1 onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>CLUB CENTER</h1>
+        <Link to="/homepage" style={{ textDecoration: "none", color: "white" }}>
+          <h1 onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+            CLUB CENTER
+          </h1>
         </Link>
       </div>
-    
-      )}
-      <div className="bottom-container">
+      <div className="bottom-container" ref={bottomContainerRef}>
         <div className="left-content">
           <p>WELCOME TO</p>
           <p>IBS JAIPUR CLUB CENTER</p>
           <p>FUN BEGINS HERE</p>
         </div>
         <div className="lottie-container">
-          <Lottie animationData={WavingHand} loop={true} className="waving-hand" />
+          <Lottie
+            animationData={WavingHand}
+            loop={true}
+            className="waving-hand"
+          />
         </div>
       </div>
-      {/* Render a small circle at the mouse position */}
-      <div className="mouse-circle" ref={mouseCircleRef}>
-        {isHovered && (
-          <p style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            marginTop: "70px",
-            fontSize: "25px",
-          }}>{displayText}</p>
-        )}
+      <div>
+        <div className="mouse-circle" ref={mouseCircleRef}>
+          {isHovered && (
+            <p
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                marginTop: "70px",
+                fontSize: "25px",
+              }}
+            >
+              {displayText}
+            </p>
+          )}
+        </div>
       </div>
     </div>
   );

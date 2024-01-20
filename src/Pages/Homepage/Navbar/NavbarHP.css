@@ -3,7 +3,7 @@
   justify-content: space-between;
   align-items: center;
   /* padding: 10px; */
-  background-color: #ECBE9C;
+  background-color: #257878;
   height: 60px;
 }
 .navbar_image img {
@@ -20,6 +20,7 @@
 }
 
 .navbar_image p {
+  color: white;
   font-size: 1rem;
   font-weight: bold;
   margin-left: 10px;
@@ -45,7 +46,7 @@
   gap: 50px; /* Adjusted gap */
   padding: 5px 15px;
   border-radius: 10px;
-  background-color: #e9dfd8;
+  background-color: white;
 }
 
 .navbar_content ul li {
@@ -55,7 +56,8 @@
 
 .navbar_content ul li a {
   text-decoration: none;
-  color: #171628;
+  font-size: 1.1rem;
+  color: #257878;
   font-weight: bold;
   cursor: pointer;
   position: relative; /* Added position */
@@ -68,11 +70,12 @@
   right: 0;
   bottom: 0;
   height: 2px; /* Adjust the height of the line as needed */
-  background-color: rgb(20, 20, 20); /* Adjust the color of the line */
+  background-color: #ff6f5b; /* Adjust the color of the line */
   transform: scaleX(0); /* Initial state - line is not visible */
   transform-origin: center;
-  transition: transform 0.3s ease; /* Smooth transition effect */
+  transition: transform 0.2s ease; /* Smooth transition effect */
 }
+
 
 .navbar_content ul li a:hover::before {
   transform: scaleX(1); /* When hovering, extend the line */

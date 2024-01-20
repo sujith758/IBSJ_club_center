@@ -1,0 +1,43 @@
+.content-homepage {
+  height: calc(100vh - 60px);
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.homepage_title {
+  padding-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  text-align: center;
+}
+
+.homepage_title h1 {
+  margin-top: 10px;
+  font-size: 6.5rem;
+  font-weight: bold;
+  transform: scaleY(1.5);
+  letter-spacing: 16px;
+  height: 150px;
+  margin-bottom: 0;
+  background-image: url("../../public/enlarge_Mosaic_Pattern.jpg");
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.bodybottom-content {
+  width: 100%;
+  z-index: 2;
+  text-align: center;
+}
+
+.bodybottom-content p {
+  color: #257878;
+  line-height: 1;
+  font-size: 2.2rem;
+}
