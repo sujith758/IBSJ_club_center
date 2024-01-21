@@ -1,7 +1,9 @@
 .content-homepage {
   height: calc(100vh - 60px);
   width: 100%;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
+  position: relative; /* Change from absolute to relative */
+  z-index: 10;
 }
 
 .homepage_title {
@@ -12,6 +14,7 @@
   justify-content: center;
   z-index: 2;
   text-align: center;
+  position: relative; /* Add this line */
 }
 
 .homepage_title h1 {
@@ -34,10 +37,20 @@
   width: 100%;
   z-index: 2;
   text-align: center;
+  position: relative; /* Add this line */
 }
 
 .bodybottom-content p {
   color: #257878;
   line-height: 1;
   font-size: 2.2rem;
+}
+
+.floating-lottie {
+  z-index: -10;
+  position: absolute; /* Change from relative to absolute */
+  top: 0;
+  left: 150px;
+  width: 1000px;
+  opacity: 0.2;
 }

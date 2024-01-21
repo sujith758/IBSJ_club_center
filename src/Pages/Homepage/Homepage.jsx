@@ -5,6 +5,8 @@ import gsap from "gsap";
 import "./Homepage.css";
 import ScrollMenu from "./ScrollMenu/ScrollMenu";
 import NavbarHP from "./Navbar/NavbarHP";
+import Lottie from "lottie-react";
+import FloatingThings from "../../public/FloatingHomepage.json"
 
 
 // gsap.registerPlugin(ScrollTrigger);
@@ -42,18 +44,24 @@ const Homepage = () => {
   return (
     <div className="homepage__div">
       <NavbarHP />
-
+      <div className="floating-lottie">
+        <Lottie
+            animationData={FloatingThings}
+            loop={true}
+            className="waving-hand"
+          />
+        </div>
       <div className="content-homepage">
         <div className="homepage_title">
           <h1>IBS JAIPUR</h1>
           <h1>CLUB CENTER</h1>
+         
         </div>
+        
         <div className="bodybottom-content" ref={BodyBottomContentRef}>
           <p>WELCOME TO</p>
           <p>IBS JAIPUR CLUB CENTER</p>
           <p>FUN BEGINS HERE</p>
-
-          {/* Downward arrow */}
           <div className="down-arrow">&#9660;</div>
         </div>
       </div>

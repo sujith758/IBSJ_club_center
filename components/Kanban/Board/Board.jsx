@@ -69,12 +69,14 @@ export default function Board(props) {
           )}
         </div>
       </div>
-      <Droppable droppableId={props.id.toString()}>
+      <Droppable droppableId={props.id}>
         {(provided) => (
           <div
             className="board__cards"
             ref={provided.innerRef}
             {...provided.droppableProps}
+            {...provided.dragHandleProps}
+
           >
             {props.card?.map((items, index) => (
               <Card

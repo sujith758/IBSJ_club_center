@@ -1,0 +1,82 @@
+.deans-corner {
+  width: 100%;
+  height: 100vh;
+}
+
+.deans-corner button {
+  position: absolute;
+  z-index: 10;
+  transform: translate(583px, 270px);
+  border: 2px solid #257878;
+  border-radius: 50px;
+  color: white;
+  transition: background-color 0.3s, color 0.3s; /* Added transition property */
+}
+
+.deans-corner button:hover {
+  background-color: #257878;
+  cursor: pointer;
+  color: white; /* Adjusted text color on hover */
+}
+
+.deans-corner button a:hover {
+  color: white;
+}
+
+.deans-corner button a {
+  text-decoration: none;
+  font-size: 2rem;
+  padding: 10px;
+  color: #257878;
+}
+
+.deans-main-div {
+  position: relative;
+  z-index: 5;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.kanban-combined {
+  width: 50%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #257878;
+}
+
+.kanban-combined a {
+  text-decoration: none;
+  font-size: 3rem;
+  font-weight: 500;
+  color: white;
+  transition: transform 0.3s ease-in-out; /* Added transition for scale */
+}
+
+.kanban-combined a:hover {
+  transform: scale(1.3);
+}
+
+.document-combined {
+  width: 50%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.document-combined a {
+  text-decoration: none;
+  font-size: 3rem;
+  font-weight: 500;
+  color: #257878;
+  transition: transform 0.3s ease-in-out; /* Added transition for scale */
+}
+
+.document-combined a:hover {
+  transform: scale(1.3);
+}
