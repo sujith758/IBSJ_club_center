@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { io } from 'socket.io-client';
+import "./FileListPage.css";
 
 const FileListPage = ({ socketForFiles }) => {
   const { sessionKey } = useParams();
@@ -119,21 +120,25 @@ const FileListPage = ({ socketForFiles }) => {
     }
   };
   return (
-    <div>
-      <h2>Files for Session Key: {sessionKey}</h2>
-      <ul>
+    <div className='file-list-page'>
+      <h2>{sessionKey}</h2>
+      <ul className='file-list-content-ul'>
         {files.map((file) => (
-          <li key={file.name}>
-            {file.name}
-            <button onClick={() => openFile(file)}>View</button>
+          <li className="file-list-content-li" key={file.name}>
+            <div className='file-name'>{file.name}</div>
+            <div className='button-upload'>
+            <button className="view-button-dc" onClick={() => openFile(file)}>View</button>
             {acceptedDocuments.includes(file.name) ? (
-              <p>Accepted</p>
+              <p style={{fontSize: "1.2rem", fontWeight: "500"}}>Accepted</p>
             ) : (
               <>
-                <button onClick={() => handleAccept(file)}>Accept</button>
-                <button onClick={() => handleReject(file)}>Reject</button>
+                <button className="accept-button-dc" onClick={() => handleAccept(file)}>Accept</button>
+                <button className="reject-button-dc" onClick={() => handleReject(file)}>Reject</button>
               </>
+              
             )}
+            </div>
+           
           </li>
         ))}
       </ul>

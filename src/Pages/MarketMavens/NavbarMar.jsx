@@ -14,7 +14,7 @@ const NavbarMar = ({onReset}) => {
         {/* <img src="../Assets/EcoBiz.png" alt="ecobiz logo" /> */}
         <ul className="navbar__list">
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/homepage">Home</Link>
           </li>
           <li>Gallery</li>
           <li>
