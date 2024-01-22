@@ -4,6 +4,10 @@
   margin-bottom: 40px;
   position: relative; /* Change from absolute to relative */
   z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
 }
 
 .homepage_title {
@@ -52,5 +56,6 @@
   top: 0;
   left: 150px;
   width: 1000px;
+  height: 100vh;
   opacity: 0.2;
 }
