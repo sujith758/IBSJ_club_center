@@ -4,6 +4,9 @@ import { MdCancel } from 'react-icons/md';
 import { IoDocumentText, IoDocument } from 'react-icons/io5';
 import './DropZone.css';
 import { useSession } from './SessionContext';
+import Lottie from "lottie-react";
+
+import UploadAnimation from "../../src/public/FileUpload.json"
 
 const FileIcon = ({ fileType }) => {
   if (!fileType || !fileType.name) {
@@ -28,6 +31,7 @@ const FileIcon = ({ fileType }) => {
 
 const Dropzone = ({ className, sessionKey, onFileSubmit, submitted, localFiles, setLocalFiles }) => {
   const { getSessionFiles, addFileToSession, removeFileFromSession } = useSession();
+  const isSubmitButtonVisible = localFiles.length > 0;
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop: useCallback((acceptedFiles) => {
       const validFiles = acceptedFiles.filter((file) => file.size <= 10 * 1024 * 1024);
@@ -61,9 +65,17 @@ const Dropzone = ({ className, sessionKey, onFileSubmit, submitted, localFiles, 
           })}
         >
           <input {...getInputProps()} />
-          <p>{isDragActive ? 'Drop the files here ...' : '+ Drag \'n\' drop some files here, or click to select files'}</p>
+          <div className='accept-region'>
+          <p>{isDragActive ? 'Drop the files here ...' : '+ Drag \'n\' drop some files here, or click to select files'} </p>
+          <Lottie
+            animationData={UploadAnimation}
+            loop={true}
+            className="upload-animation"
+          />
+          </div>
+          
         </div>
-        <h3 className='files-heading'>Accepted Files</h3>
+        <h3 className='files-heading'>Uploaded Files</h3>
         <div className='files-preview'>
           {localFiles.length > 0 && (
             <ul className='file-list-ul'>
@@ -97,6 +109,7 @@ const Dropzone = ({ className, sessionKey, onFileSubmit, submitted, localFiles, 
           )}
         </div>
       </form>
+      
     </>
   );
 };

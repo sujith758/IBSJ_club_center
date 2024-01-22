@@ -1,34 +1,33 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const NavbarBS = ({onReset}) => {
-
+const NavbarBS = ({ onReset }) => {
   const handleResetClick = () => {
-    const isConfirmed = window.confirm('Are you sure you want to reset the data?');
+    const isConfirmed = window.confirm(
+      "Are you sure you want to reset the data?"
+    );
     if (isConfirmed) {
-      onReset(); // Call the provided callback function for reset
+      onReset();
     }
   };
   return (
     <div>
-      <div className="navbar__container">
+      <div className="navbar_container_club">
         {/* <img src="../Assets/EcoBiz.png" alt="ecobiz logo" /> */}
-        <ul className="navbar__list">
-        <li><Link to="/homepage">Home</Link></li>
-          <li>Gallery</li>
+        <ul className="navbar_list_club">
           <li>
-           <Link to="/kanban/BusinessSquad">
-              Kanban
-            </Link>
+            <Link to="/homepage">Home</Link>
           </li>
           <li>
-          <Link to='/documentupload/BusinessSquad'>Dropzone</Link>
+            <Link to="/kanban/BusinessSquad">Kanban</Link>
+          </li>
+          <li>
+            <Link to="/documentupload/BusinessSquad">Dropzone</Link>
           </li>
         </ul>
         <button onClick={handleResetClick} className="reset-button">
-              Reset
-            </button>
-
+          Reset
+        </button>
       </div>
     </div>
   );
