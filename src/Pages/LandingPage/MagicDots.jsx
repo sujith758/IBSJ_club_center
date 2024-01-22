@@ -10,7 +10,7 @@ const MagicDots = () => {
   );
 };
 
-const GRID_WIDTH = 35;
+const GRID_WIDTH = 42;
 const GRID_HEIGHT = 9;
 
 const DotGrid = () => {
