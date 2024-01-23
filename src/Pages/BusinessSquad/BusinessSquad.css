@@ -1,0 +1,10 @@
+.navbar-left{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.navbar-navigation{
+  list-style: none;
+}

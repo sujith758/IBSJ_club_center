@@ -1,32 +1,28 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "../NavbarReg.css";
+import PixLogo from "../../public/clublogos/Pixel Club.jpg";
 
-const NavbarPix = ({onReset}) => {
-  const handleResetClick = () => {
-    const isConfirmed = window.confirm('Are you sure you want to reset the data?');
-    if (isConfirmed) {
-      onReset(); // Call the provided callback function for reset
-    }
-  };
+const NavbarPix = () => {
   return (
-    <div>
-      <div className="navbar__container">
-        {/* <img src="../Assets/EcoBiz.png" alt="ecobiz logo" /> */}
-        <ul className="navbar__list">
-        <li><Link to="/homepage">Home</Link></li>
-          <li>Gallery</li>
+    <div className="navbar_container_club">
+      <div className="navbar_image_club">
+        <img src={PixLogo} alt="ecobiz logo" />
+        <div className="vertical_line_club"></div>
+        <p>Pixel Club</p>
+      </div>
+      <div className="navbar_content_club">
+        <ul className="navbar_list_club">
           <li>
-           <Link to="/kanban/Pixels">
-              Kanban
-            </Link>
+            <Link to="/homepage">Home</Link>
           </li>
           <li>
-          <Link to='/documentupload/Pixels'>Dropzone</Link>
+            <Link to="/kanban/Pixels">Kanban</Link>
+          </li>
+          <li>
+            <Link to="/documentupload/Pixels">Dropzone</Link>
           </li>
         </ul>
-        <button onClick={handleResetClick} className="reset-button">
-              Reset
-            </button>
       </div>
     </div>
   );

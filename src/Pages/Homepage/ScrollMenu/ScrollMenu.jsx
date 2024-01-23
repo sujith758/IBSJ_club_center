@@ -74,7 +74,7 @@ export const ScrollMenu = () => {
           heading="Money Matrix Club"
           subheading="Learn what we do here"
           imgSrc={Mon}
-          href="#/Money Matrix"
+          href="#/Money Matrix Club"
         />
         <Link
           heading="Navrang"

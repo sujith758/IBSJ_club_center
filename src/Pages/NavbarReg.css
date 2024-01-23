@@ -1,0 +1,78 @@
+.navbar_container_club {
+  width: 100%;
+  height: 60px;
+  padding: 0 10px;
+  background-color: #257878;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.vertical_line_club {
+  color: black;
+  width: 1px;
+  height: 50px;
+}
+
+.navbar_image_club {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 220px;
+}
+.navbar_image_club img {
+  width: 50px;
+}
+
+.vertical_line_club {
+  /* position: absolute; */
+  height: 40px;
+  width: 2px;
+  background-color: black;
+  margin-left: 10px;
+  margin-right: 10px;
+  z-index: 100;
+}
+.navbar_image_club p {
+  color: white;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding-top: 18px;
+}
+
+.navbar_list_club {
+  background-color: white;
+  border-radius: 10px;
+  list-style: none;
+  display: flex;
+  margin: 0;
+  gap: 40px;
+  padding: 5px 20px;
+  align-items: baseline;
+}
+
+.navbar_list_club li a {
+  position: relative;
+
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #257878;
+  text-decoration: none;
+}
+.navbar_list_club li a::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px; /* Adjust the height of the line as needed */
+  background-color: #ff6f5b; /* Adjust the color of the line */
+  transform: scaleX(0); /* Initial state - line is not visible */
+  transition: transform 0.2s ease; /* Smooth transition effect */
+  transform-origin: bottom center; /* Adjusted transform-origin property */
+}
+
+.navbar_list_club li a:hover::before {
+  transform: scaleX(1); /* When hovering, extend the line */
+  transform-origin: bottom center; /* Adjusted transform-origin property */
+}

@@ -1,33 +1,32 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
+import "../NavbarReg.css";
+import CommLogo from "../../public/clublogos/Communiqa.jpg";
 
-const NavbarComm = ({onReset}) => {
-  const handleResetClick = () => {
-    const isConfirmed = window.confirm('Are you sure you want to reset the data?');
-    if (isConfirmed) {
-      onReset(); // Call the provided callback function for reset
-    }
-  };
+const NavbarComm = () => {
   return (
-    <div>
-      <div className='navbar__container'>
-        {/* <img src='../Assets/EcoBiz.png' alt='ecobiz logo' /> */}
-        <ul className='navbar__list'>
-        <li><Link to="/homepage">Home</Link></li>
-          <li>Gallery</li>
+    <div className="navbar_container_club">
+      <div className="navbar_image_club">
+        <img src={CommLogo} alt="ecobiz logo" />
+        <div className="vertical_line_club"></div>
+        <p>Communiqa</p>
+      </div>
+      <div className="navbar_content_club">
+        <ul className="navbar_list_club">
           <li>
-            <Link to='/kanban/Communiqa'>Kanban</Link>
+            <Link to="/homepage">Home</Link>
           </li>
           <li>
-          <Link to='/documentupload/Communiqa'>Dropzone</Link>
+            <Link to="/kanban/Communiqa">Kanban</Link>
+          </li>
+          <li>
+            <Link to="/documentupload/Communiqa">Dropzone</Link>
           </li>
         </ul>
-        <button onClick={handleResetClick} className="reset-button">
-              Reset
-            </button>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default NavbarComm;
+

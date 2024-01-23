@@ -1,19 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "../NavbarReg.css";
+import BSLogo from "../../public/clublogos/Business Squad.jpg";
 
-const NavbarBS = ({ onReset }) => {
-  const handleResetClick = () => {
-    const isConfirmed = window.confirm(
-      "Are you sure you want to reset the data?"
-    );
-    if (isConfirmed) {
-      onReset();
-    }
-  };
+const NavbarBS = () => {
   return (
-    <div>
-      <div className="navbar_container_club">
-        {/* <img src="../Assets/EcoBiz.png" alt="ecobiz logo" /> */}
+    <div className="navbar_container_club">
+      <div className="navbar_image_club">
+        <img src={BSLogo} alt="ecobiz logo" />
+        <div className="vertical_line_club"></div>
+        <p>Business Squad</p>
+      </div>
+      <div className="navbar_content_club">
         <ul className="navbar_list_club">
           <li>
             <Link to="/homepage">Home</Link>
@@ -25,9 +23,6 @@ const NavbarBS = ({ onReset }) => {
             <Link to="/documentupload/BusinessSquad">Dropzone</Link>
           </li>
         </ul>
-        <button onClick={handleResetClick} className="reset-button">
-          Reset
-        </button>
       </div>
     </div>
   );
