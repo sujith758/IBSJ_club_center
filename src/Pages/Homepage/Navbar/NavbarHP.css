@@ -80,3 +80,107 @@
 .navbar_content ul li a:hover::before {
   transform: scaleX(1); /* When hovering, extend the line */
 }
+
+.navbar_content span{
+  text-decoration: none;
+  font-size: 1.1rem;
+  color: #257878;
+  font-weight: bold;
+  cursor: pointer;
+  position: relative; /* Added position */
+}
+
+.navbar_content span::before{
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px; /* Adjust the height of the line as needed */
+  background-color: #ff6f5b; /* Adjust the color of the line */
+  transform: scaleX(0); /* Initial state - line is not visible */
+  transform-origin: center;
+  transition: transform 0.2s ease; /* Smooth transition effect */
+}
+
+.navbar_content span:hover::before {
+  transform: scaleX(1); /* When hovering, extend the line */
+}
+
+/* Modal styles */
+.login_modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+    display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  transition: opacity 0.3s ease; /* Add transition for opacity */
+  opacity: 0; /* Initial op acity set to 0 */
+  background-color: rgba(0, 0, 0, 0.7);
+
+}
+
+
+
+.login_modal-content {
+  width: 30%;
+  background-color: #257878;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+  transition: transform 0.3s ease; /* Add transition for transform */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+.login_modal-content input{
+  padding: 10px;
+  width: 100%;
+  border: 1px solid black;
+  border-radius: 5px;
+  
+}
+
+.login_modal.show {
+  opacity: 1; /* Show the modal with opacity transition */
+
+}
+
+/* Add this class to trigger the modal show transition */
+.modal-content.show {
+  transform: scale(1); /* Show the modal with transform transition */
+}
+.login_modal_buttons{
+  display: flex;
+  gap: 30px;
+  align-items: center;
+
+}
+
+.login_modal_buttons button {
+  background-color: white;
+  color: #257878;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100px;
+  height: 40px;
+  font-weight: 600;
+}
+
+.login_modal_buttons button:hover {
+  background-color: #1d5e63;
+  color: white;
+}
+
+.login_modal_buttons button,
+.login_modal_buttons button:active {
+  outline: none;
+}
+

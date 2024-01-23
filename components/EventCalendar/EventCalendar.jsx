@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
-
+import {motion as m} from "framer-motion";
 import './EventCalendar.css'; // Import a CSS file for styling
 
 const EventCalendar = () => {
@@ -179,6 +179,11 @@ const EventCalendar = () => {
   };
 
   return (
+    <m.main
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.75, ease: "easeInOut" }}
+    >
      <div className='event_calendar'>
       <FullCalendar key={JSON.stringify(events)} {...calendarOptions} />
 
@@ -198,6 +203,7 @@ const EventCalendar = () => {
         </div>
       )}
     </div>
+    </m.main>
   );
 };
 
