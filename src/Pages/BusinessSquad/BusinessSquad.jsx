@@ -6,23 +6,31 @@ import { Link } from "react-router-dom";
 
 const BusinessSquad = ({ socketForFiles, sessionKey }) => {
   const [acceptedDocuments, setAcceptedDocuments] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
 
-  const handleReset = () => {
+  const handleReset = async () => {
     const confirmReset = window.confirm(
       "Are you sure you want to reset and delete all accepted documents?"
     );
 
     if (confirmReset) {
-      setAcceptedDocuments([]);
-      localStorage.removeItem(`acceptedDocuments_${sessionKey}`);
+      try {
+        // Delete files from the server
+        const deleteResponse = await fetch(`http://localhost:3001/deleteFiles/${sessionKey}`, {
+          method: "POST",
+        });
 
-      fetch(`http://localhost:3001/deleteFiles/${sessionKey}`, {
-        method: "POST",
-      })
-        .then((response) => response.text())
-        .then((message) => console.log(message))
-        .catch((error) => console.error("Error deleting files:", error));
+        if (!deleteResponse.ok) {
+          throw new Error(`Failed to delete files. Status: ${deleteResponse.status}`);
+        }
+
+        // Update local state and remove stored data
+        setAcceptedDocuments([]);
+        localStorage.removeItem(`acceptedDocuments_${sessionKey}`);
+        console.log("Files deleted successfully.");
+
+      } catch (error) {
+        console.error("Error deleting files:", error.message);
+      }
     }
   };
 
@@ -32,7 +40,6 @@ const BusinessSquad = ({ socketForFiles, sessionKey }) => {
     );
     if (storedData) {
       setAcceptedDocuments(storedData);
-      setIsLoading(false);
     }
   }, [sessionKey]);
 
@@ -57,7 +64,6 @@ const BusinessSquad = ({ socketForFiles, sessionKey }) => {
       } catch (error) {
         console.error("Error fetching accepted documents:", error.message);
       } finally {
-        setIsLoading(false);
       }
     };
 
@@ -73,9 +79,6 @@ const BusinessSquad = ({ socketForFiles, sessionKey }) => {
           <button onClick={handleReset} className="reset-button">
             Reset
           </button>
-          {isLoading ? (
-            <p>No Status Updates</p>
-          ) : (
             <ul>
               {acceptedDocuments.map((document, index) => (
                 <li key={index}>
@@ -84,7 +87,6 @@ const BusinessSquad = ({ socketForFiles, sessionKey }) => {
                 </li>
               ))}
             </ul>
-          )}
         </div>
       </div>
 

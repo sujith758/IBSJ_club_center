@@ -10,7 +10,6 @@ const FileListPage = ({ socketForFiles }) => {
   const [acceptedDocuments, setAcceptedDocuments] = useState(
     JSON.parse(localStorage.getItem(`acceptedDocuments_${sessionKey}`)) || []
   );
-  const socket = io.connect('http://localhost:3001');
 
   useEffect(() => {
     const fetchFiles = async () => {
@@ -71,7 +70,6 @@ const FileListPage = ({ socketForFiles }) => {
       }
   
       // Emit the event to the server after the state is updated
-      socket.emit('accept_document', { sessionKey, documentName: file.name });
   
       // Insert data into PostgreSQL database
       console.log('Inserting accepted file into the database...');
