@@ -117,21 +117,21 @@ const App = () => {
           <Route path="/deanscorner" element={<DeansCorner socketForFiles={socketForFiles} />}/>
           <Route path="/aboutus" element={<AboutUs />}/>
           <Route path="/eventcalendar" element={<EventCalendar />}/>
-          <Route path="/Business Squad" element={<BusinessSquad socketForFiles={socketForFiles} sessionKey='BusinessSquad'/>}/>
+          <Route path="/BusinessSquad" element={<BusinessSquad socketForFiles={socketForFiles} sessionKey='BusinessSquad'/>}/>
           <Route path="/Cognizance" element={<Cognizance socketForFiles={socketForFiles} sessionKey='Cognizance'/>}/>
           <Route path="/Communiqa" element={<Communiqa socketForFiles={socketForFiles} sessionKey='Communiqa'/>}/>
           <Route path="/EcoBiz" element={<EcoBiz socketForFiles={socketForFiles} sessionKey='EcoBiz'/>}/>
           <Route path="/Graffiti" element={<Graffiti socketForFiles={socketForFiles} sessionKey='Graffiti'/>}/> 
-          <Route path="/Ignited Minds" element={<IgnitedMinds socketForFiles={socketForFiles} sessionKey='IgnitedMinds'/>}/> 
-          <Route path="/Khel Ratna" element={<KhelRatna socketForFiles={socketForFiles} sessionKey='KhelRatna'/>}/>
-          <Route path="/Market Mavens" element={<MarketMavens socketForFiles={socketForFiles} sessionKey='MarketMavens'/>}/>
-          <Route path="/Money Matrix Club" element={<MoneyMatrix socketForFiles={socketForFiles} sessionKey='MoneyMatrix'/>}/>
+          <Route path="/IgnitedMinds" element={<IgnitedMinds socketForFiles={socketForFiles} sessionKey='IgnitedMinds'/>}/> 
+          <Route path="/KhelRatna" element={<KhelRatna socketForFiles={socketForFiles} sessionKey='KhelRatna'/>}/>
+          <Route path="/MarketMavens" element={<MarketMavens socketForFiles={socketForFiles} sessionKey='MarketMavens'/>}/>
+          <Route path="/MoneyMatrix" element={<MoneyMatrix socketForFiles={socketForFiles} sessionKey='MoneyMatrix'/>}/>
           <Route path="/Navrang" element={<Navrang socketForFiles={socketForFiles} sessionKey='Navrang'/>}/>
-          <Route path="/Pixel Club" element={<Pixels socketForFiles={socketForFiles} sessionKey='Pixels'/>}/>
+          <Route path="/Pixels" element={<Pixels socketForFiles={socketForFiles} sessionKey='Pixels'/>}/>
           <Route path="/Prayaas" element={<Prayaas socketForFiles={socketForFiles} sessionKey='Prayaas'/>}/>
           <Route path="/Synchronize" element={<Synchronize socketForFiles={socketForFiles} sessionKey='Synchronize'/>}/>
-          <Route path="/Techno Club" element={<Techno socketForFiles={socketForFiles} sessionKey='Techno'/>}/>
-          <Route path="/Youth Vibes" element={<YouthVibes socketForFiles={socketForFiles} sessionKey='YouthVibes'/>}/>
+          <Route path="/Techno" element={<Techno socketForFiles={socketForFiles} sessionKey='Techno'/>}/>
+          <Route path="/YouthVibes" element={<YouthVibes socketForFiles={socketForFiles} sessionKey='YouthVibes'/>}/>
           <Route path="/kanban/:sessionKey" element={<Kanban />}/>
           <Route path="/gallery" element={<Gallery />}/>
           <Route path="/kanbancombined" element={<KanbanCombined />} />
