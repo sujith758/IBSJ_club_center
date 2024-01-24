@@ -2,10 +2,12 @@
 import React, { useState, useEffect } from "react";
 import "./MarketMavens.css";
 import NavbarMar from "./NavbarMar";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 
 const MarketMavens = ({ socketForFiles, sessionKey }) => {
   const [acceptedDocuments, setAcceptedDocuments] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isMenuOpen, setMenuOpen] = useState(false);
 
   const handleReset = () => {
     const confirmReset = window.confirm(
@@ -13,15 +15,26 @@ const MarketMavens = ({ socketForFiles, sessionKey }) => {
     );
 
     if (confirmReset) {
-      setAcceptedDocuments([]);
-      localStorage.removeItem(`acceptedDocuments_${sessionKey}`);
-
-      fetch(`http://localhost:3001/deleteFiles/${sessionKey}`, {
-        method: "POST",
-      })
-        .then((response) => response.text())
-        .then((message) => console.log(message))
-        .catch((error) => console.error("Error deleting files:", error));
+      try {
+        // Delete files from the server
+        fetch(`http://localhost:3001/deleteFiles/${sessionKey}`, {
+          method: "POST",
+        })
+          .then((deleteResponse) => {
+            if (!deleteResponse.ok) {
+              throw new Error(
+                `Failed to delete files. Status: ${deleteResponse.status}`
+              );
+            }
+            return deleteResponse.text();
+          })
+          .catch((error) => console.error("Error deleting files:", error));
+      } catch (error) {
+        console.error("Error deleting files:", error.message);
+      } finally {
+        setAcceptedDocuments([]); // Update local state
+        localStorage.removeItem(`acceptedDocuments_${sessionKey}`); // Remove stored data
+      }
     }
   };
 
@@ -31,7 +44,6 @@ const MarketMavens = ({ socketForFiles, sessionKey }) => {
     );
     if (storedData) {
       setAcceptedDocuments(storedData);
-      setIsLoading(false);
     }
   }, [sessionKey]);
 
@@ -53,7 +65,6 @@ const MarketMavens = ({ socketForFiles, sessionKey }) => {
           `acceptedDocuments_${sessionKey}`,
           JSON.stringify(acceptedDocumentsDataOut)
         );
-        setIsLoading(false);
       } catch (error) {
         console.error("Error fetching accepted documents:", error.message);
       }
@@ -62,27 +73,45 @@ const MarketMavens = ({ socketForFiles, sessionKey }) => {
     fetchAcceptedDocuments();
   }, [sessionKey]);
 
+  const toggleMenu = () => {
+    setMenuOpen(!isMenuOpen);
+  };
+
   return (
     <div>
-      <div className="navbar-left">
         <NavbarMar />
-        <div className="navbar-accept">
-          <h2>Accepted Documents:</h2>
-          <button onClick={handleReset} className="reset-button">
-            Reset
-          </button>
-          {isLoading ? (
-            <p>No files</p>
-          ) : (
+        <div className={`left-menu-container ${isMenuOpen ? "menu-open" : ""}`}>
+        <div className="hamburger-menu" onClick={toggleMenu}>
+          <FontAwesomeIcon icon={isMenuOpen ? faTimes : faBars} />
+        </div>
+        <div className="menu-left">
+          <div className="menu-content">
+            <div className="menu-header">
+              <h2>Document Status</h2>
+              <button onClick={handleReset} className="reset-button">
+                Reset
+              </button>
+            </div>
             <ul>
               {acceptedDocuments.map((document, index) => (
-                <li key={index}>
-                  <p>Name: {document.file_name}</p>
-                  <p>Status: {document.status}</p>
+                <li
+                  key={index}
+                  className={
+                    document.status === "Accepted" ? "bg-success" : "bg-danger"
+                  }
+                >
+                  <p style={{ fontSize: "1rem" }}>
+                    <span style={{ fontWeight: "700" }}>Name: </span>
+                    {document.file_name}
+                  </p>
+                  <p style={{ fontSize: "1rem" }}>
+                    <span style={{ fontWeight: "700" }}>Status: </span>
+                    {document.status}
+                  </p>
                 </li>
               ))}
             </ul>
-          )}
+          </div>
         </div>
       </div>
 

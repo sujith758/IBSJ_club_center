@@ -1,13 +1,14 @@
-// BusinessSquad.jsx
 import React, { useState, useEffect } from "react";
 import NavbarBS from "./NavbarBS";
 import "./BusinessSquad.css";
-import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 
 const BusinessSquad = ({ socketForFiles, sessionKey }) => {
   const [acceptedDocuments, setAcceptedDocuments] = useState([]);
+  const [isMenuOpen, setMenuOpen] = useState(false);
 
-  const handleReset = async () => {
+  const handleReset = () => {
     const confirmReset = window.confirm(
       "Are you sure you want to reset and delete all accepted documents?"
     );
@@ -15,21 +16,23 @@ const BusinessSquad = ({ socketForFiles, sessionKey }) => {
     if (confirmReset) {
       try {
         // Delete files from the server
-        const deleteResponse = await fetch(`http://localhost:3001/deleteFiles/${sessionKey}`, {
+        fetch(`http://localhost:3001/deleteFiles/${sessionKey}`, {
           method: "POST",
-        });
-
-        if (!deleteResponse.ok) {
-          throw new Error(`Failed to delete files. Status: ${deleteResponse.status}`);
-        }
-
-        // Update local state and remove stored data
-        setAcceptedDocuments([]);
-        localStorage.removeItem(`acceptedDocuments_${sessionKey}`);
-        console.log("Files deleted successfully.");
-
+        })
+          .then((deleteResponse) => {
+            if (!deleteResponse.ok) {
+              throw new Error(
+                `Failed to delete files. Status: ${deleteResponse.status}`
+              );
+            }
+            return deleteResponse.text();
+          })
+          .catch((error) => console.error("Error deleting files:", error));
       } catch (error) {
         console.error("Error deleting files:", error.message);
+      } finally {
+        setAcceptedDocuments([]); // Update local state
+        localStorage.removeItem(`acceptedDocuments_${sessionKey}`); // Remove stored data
       }
     }
   };
@@ -63,33 +66,53 @@ const BusinessSquad = ({ socketForFiles, sessionKey }) => {
         );
       } catch (error) {
         console.error("Error fetching accepted documents:", error.message);
-      } finally {
       }
     };
 
     fetchAcceptedDocuments();
   }, [sessionKey]);
 
+  const toggleMenu = () => {
+    setMenuOpen(!isMenuOpen);
+  };
+
   return (
     <div>
-      <div className="navbar-left">
-        <NavbarBS />
-        <div className="navbar-accept">
-          <h2>Accepted Documents:</h2>
-          <button onClick={handleReset} className="reset-button">
-            Reset
-          </button>
+      <NavbarBS />
+      <div className={`left-menu-container ${isMenuOpen ? "menu-open" : ""}`}>
+        <div className="hamburger-menu" onClick={toggleMenu}>
+          <FontAwesomeIcon icon={isMenuOpen ? faTimes : faBars} />
+        </div>
+        <div className="menu-left">
+          <div className="menu-content">
+            <div className="menu-header">
+              <h2>Document Status</h2>
+              <button onClick={handleReset} className="reset-button">
+                Reset
+              </button>
+            </div>
             <ul>
               {acceptedDocuments.map((document, index) => (
-                <li key={index}>
-                  <p>Name: {document.file_name}</p>
-                  <p>Status: {document.status}</p>
+                <li
+                  key={index}
+                  className={
+                    document.status === "Accepted" ? "bg-success" : "bg-danger"
+                  }
+                >
+                  <p style={{ fontSize: "1rem" }}>
+                    <span style={{ fontWeight: "700" }}>Name: </span>
+                    {document.file_name}
+                  </p>
+                  <p style={{ fontSize: "1rem" }}>
+                    <span style={{ fontWeight: "700" }}>Status: </span>
+                    {document.status}
+                  </p>
                 </li>
               ))}
             </ul>
+          </div>
         </div>
       </div>
-
       <div className="clubpage-body"></div>
     </div>
   );

@@ -5,14 +5,13 @@ const cors = require("cors");
 const multer = require("multer");
 const path = require("path");
 const fs = require("fs").promises;
-const { Pool } = require('pg');
+const { Pool } = require("pg");
 
 const app = express();
 const httpServer = http.createServer(app);
 
 app.use(cors());
 app.use(express.json());
-
 
 const io = new Server(httpServer, {
   cors: {
@@ -22,7 +21,7 @@ const io = new Server(httpServer, {
 });
 
 const pool = new Pool({
-  connectionString: 'postgresql://postgres:sujith98@localhost:5432/ibsj_c_c',
+  connectionString: "postgresql://postgres:sujith98@localhost:5432/ibsj_c_c",
 });
 
 // Function to insert accepted file data into PostgreSQL database
@@ -30,19 +29,19 @@ const insertAcceptedFile = async (sessionKey, acceptedDocumentName, status) => {
   const client = await pool.connect(); // Acquire a client from the pool
 
   try {
-    await client.query('BEGIN'); // Start a transaction
+    await client.query("BEGIN"); // Start a transaction
 
     // Perform the database insertion
-    const queryText = 'INSERT INTO file_status(session_key, file_name, status) VALUES($1, $2, $3)';
+    const queryText =
+      "INSERT INTO file_status(session_key, file_name, status) VALUES($1, $2, $3)";
     const values = [sessionKey, acceptedDocumentName, status];
     await client.query(queryText, values);
 
-    await client.query('COMMIT'); // Commit the transaction
-  }  catch (error) {
-    await client.query('ROLLBACK');
-    console.error('Error during database insertion:', error);
+    await client.query("COMMIT"); // Commit the transaction
+  } catch (error) {
+    await client.query("ROLLBACK");
+    console.error("Error during database insertion:", error);
     throw error;
-
   } finally {
     client.release(); // Release the client back to the pool
   }
@@ -76,27 +75,17 @@ io.on("connection", (socket) => {
     socket.join(sessionKey);
 
     if (sessionsDataText[sessionKey]) {
-      socket.emit(`recieve_data_text_${sessionKey}`, sessionsDataText[sessionKey]);
+      socket.emit(
+        `recieve_data_text_${sessionKey}`,
+        sessionsDataText[sessionKey]
+      );
     }
-    // if (fileName[sessionKey]){
-    //   socket.emit(`file_accepted_${sessionKey}`, fileName[sessionKey]);
-    // }
   });
-
-  // socket.on("accept_document", ({ sessionKey, documentName }) => {
-  //   fileName[sessionKey] = documentName;
-  //   console.log(`file_accepted_${sessionKey}: ${documentName}`);
-  //   io.to(sessionKey).emit(`file_accepted_${sessionKey}`, { documentName: documentName });
-  // });
 
   socket.on("update_data_text", ({ sessionKey, data }) => {
     sessionsDataText[sessionKey] = data;
     io.to(sessionKey).emit(`recieve_data_text_${sessionKey}`, data);
   });
-
-  // socket.on('reset_files', ({acceptedDocuments, sessionKey}) => {
-  //   io.to(sessionKey).emit('files_reset',acceptedDocuments);
-  // });
 
   socket.on("disconnect", () => {
     console.log(`user disconnected: ${socket.id}`);
@@ -108,14 +97,16 @@ app.post("/insertAcceptedFile", express.json(), async (req, res) => {
 
   try {
     // Check the provided status and insert accordingly
-    if (status === 'Accepted' || status === 'Rejected') {
+    if (status === "Accepted" || status === "Rejected") {
       // Call the function to insert accepted file data into the PostgreSQL database
       await insertAcceptedFile(sessionKey, acceptedDocumentNameIn, status);
 
       // Send a success response back to the client
       res.status(200).json({ success: true });
     } else {
-      res.status(400).json({ success: false, error: "Invalid status provided" });
+      res
+        .status(400)
+        .json({ success: false, error: "Invalid status provided" });
     }
   } catch (error) {
     console.error("Failed to insert accepted file. Error:", error.message);
@@ -129,7 +120,7 @@ app.get("/files/:sessionKey/accepted", async (req, res) => {
   try {
     const client = await pool.connect();
     const result = await client.query(
-      'SELECT file_name,status FROM file_status WHERE session_key = $1',
+      "SELECT file_name,status FROM file_status WHERE session_key = $1",
       [sessionKey]
     );
 
@@ -186,7 +177,9 @@ app.post("/deleteFiles/:sessionKey", async (req, res) => {
 
     // Delete records from the database
     const client = await pool.connect();
-    await client.query('DELETE FROM file_status WHERE session_key = $1', [sessionKey]);
+    await client.query("DELETE FROM file_status WHERE session_key = $1", [sessionKey]);
+
+    // Release the database client
     client.release();
 
     res.status(200).send("All files and database records deleted successfully");
@@ -195,6 +188,7 @@ app.post("/deleteFiles/:sessionKey", async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
+
 
 app.get("/files/:sessionKey", async (req, res) => {
   const sessionKey = req.params.sessionKey;
@@ -217,41 +211,41 @@ const insertEvent = async (title, event_date) => {
   const client = await pool.connect();
 
   try {
-    await client.query('BEGIN');
+    await client.query("BEGIN");
 
-    const queryText = 'INSERT INTO events(title,event_date,created_at) VALUES($1, $2, $3) RETURNING *';
+    const queryText =
+      "INSERT INTO events(title,event_date,created_at) VALUES($1, $2, $3) RETURNING *";
     const values = [title, event_date, new Date()];
     const result = await client.query(queryText, values);
 
-    await client.query('COMMIT');
+    await client.query("COMMIT");
 
     // Return the inserted event
     return result.rows[0];
   } catch (error) {
-    await client.query('ROLLBACK');
-    console.error('Error during event insertion:', error);
+    await client.query("ROLLBACK");
+    console.error("Error during event insertion:", error);
     throw error;
   } finally {
     client.release();
   }
 };
 
-
 // Function to update event data in PostgreSQL database
 const updateEvent = async (eventId, title) => {
   const client = await pool.connect();
 
   try {
-    await client.query('BEGIN');
+    await client.query("BEGIN");
 
-    const queryText = 'UPDATE events SET title = $1 WHERE id = $2';
+    const queryText = "UPDATE events SET title = $1 WHERE id = $2";
     const values = [title, eventId];
     await client.query(queryText, values);
 
-    await client.query('COMMIT');
+    await client.query("COMMIT");
   } catch (error) {
-    await client.query('ROLLBACK');
-    console.error('Error during event update:', error);
+    await client.query("ROLLBACK");
+    console.error("Error during event update:", error);
     throw error;
   } finally {
     client.release();
@@ -263,16 +257,16 @@ const deleteEvent = async (eventId) => {
   const client = await pool.connect();
 
   try {
-    await client.query('BEGIN');
+    await client.query("BEGIN");
 
-    const queryText = 'DELETE FROM events WHERE id = $1';
+    const queryText = "DELETE FROM events WHERE id = $1";
     const values = [eventId];
     await client.query(queryText, values);
 
-    await client.query('COMMIT');
+    await client.query("COMMIT");
   } catch (error) {
-    await client.query('ROLLBACK');
-    console.error('Error during event deletion:', error);
+    await client.query("ROLLBACK");
+    console.error("Error during event deletion:", error);
     throw error;
   } finally {
     client.release();
@@ -309,7 +303,7 @@ app.get("/events", async (req, res) => {
     const client = await pool.connect();
 
     // Query to fetch events from the database
-    const result = await client.query('SELECT * FROM events');
+    const result = await client.query("SELECT * FROM events");
     const events = result.rows;
 
     client.release();
@@ -334,7 +328,6 @@ app.delete("/events/:eventId", async (req, res) => {
 });
 
 app.use("/public", express.static(path.join(__dirname, "public")));
-
 
 // Start the server
 const PORT = 3001;
