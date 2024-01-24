@@ -1,82 +1,10 @@
-/* BusinessSquad.css */
-
-.navbar-container {
+.navbar-left{
   display: flex;
-  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
 }
 
-.navbar-left {
-  width: 0;
-  height: 100%;
-  overflow: hidden;
-  background-color: #fff;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  transition: width 0.5s ease; /* Add a transition for the width property */
+.navbar-navigation{
+  list-style: none;
 }
-
-
-
-.menu-content {
-  padding: 20px;
-}
-
-.menu-content h2 {
-  font-size: 1.2rem;
-  color: #257878;
-  margin-left: 0;
-  transition: margin-left 0.5s ease; /* Add a transition for the margin-left property */
-}
-
-.menu-content button {
-  font-size: 1rem;
-  margin-top: 10px;
-  padding: 0.7rem;
-  background-color: #257878;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-.menu-content ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-
-.menu-content li {
-  margin-top: 10px;
-  margin-bottom: 10px;
-  padding: 10px;
-  background-color: #ddd;
-}
-
-.menu-content li p {
-  font-size: 1.1rem;
-  margin: 0;
-}
-
-.hamburger-menu {
-  background-color: white;
-  font-size: 24px;
-  cursor: pointer;
-  transition: transform 0.5s ease; /* Add a transition for the transform property */
-}
-
-.navbar-container.menu-open .navbar-left {
-  width: 30%;
-}
-
-.navbar-container.menu-open .hamburger-menu {
-  transform: translateX(30%);
-}
-
-.bg-success {
-  background-color: #28a745; /* Set the background color for "Accepted" status */
-  color: #fff; /* Set the text color for better visibility */
-}
-
-.bg-danger {
-  background-color: #dc3545; /* Set the background color for "Rejected" status */
-  color: #fff; /* Set the text color for better visibility */
-}
-

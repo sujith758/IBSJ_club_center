@@ -2,30 +2,35 @@
 import React, { useState, useEffect } from "react";
 import NavbarBS from "./NavbarBS";
 import "./BusinessSquad.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
-
+import { Link } from "react-router-dom";
 
 const BusinessSquad = ({ socketForFiles, sessionKey }) => {
   const [acceptedDocuments, setAcceptedDocuments] = useState([]);
-  const [isMenuOpen, setMenuOpen] = useState(false);
 
-
-  const handleReset = () => {
+  const handleReset = async () => {
     const confirmReset = window.confirm(
       "Are you sure you want to reset and delete all accepted documents?"
     );
 
     if (confirmReset) {
-      setAcceptedDocuments([]);
-      localStorage.removeItem(`acceptedDocuments_${sessionKey}`);
+      try {
+        // Delete files from the server
+        const deleteResponse = await fetch(`http://localhost:3001/deleteFiles/${sessionKey}`, {
+          method: "POST",
+        });
 
-      fetch(`http://localhost:3001/deleteFiles/${sessionKey}`, {
-        method: "POST",
-      })
-        .then((response) => response.text())
-        .then((message) => console.log(message))
-        .catch((error) => console.error("Error deleting files:", error));
+        if (!deleteResponse.ok) {
+          throw new Error(`Failed to delete files. Status: ${deleteResponse.status}`);
+        }
+
+        // Update local state and remove stored data
+        setAcceptedDocuments([]);
+        localStorage.removeItem(`acceptedDocuments_${sessionKey}`);
+        console.log("Files deleted successfully.");
+
+      } catch (error) {
+        console.error("Error deleting files:", error.message);
+      }
     }
   };
 
@@ -65,38 +70,23 @@ const BusinessSquad = ({ socketForFiles, sessionKey }) => {
     fetchAcceptedDocuments();
   }, [sessionKey]);
 
-  const toggleMenu = () => {
-    setMenuOpen(!isMenuOpen);
-  };
-
   return (
     <div>
-      <NavbarBS />
-
-      <div className={`navbar-container ${isMenuOpen ? "menu-open" : ""}`}>
-        <div className="hamburger-menu" onClick={toggleMenu}>
-          <FontAwesomeIcon icon={isMenuOpen ? faTimes : faBars} />
-        </div>
-        <div className="navbar-left">
-          <div className="menu-content">
-            <div className="menu-header">
-              <h2>Accepted Documents</h2>
-              <button onClick={handleReset} className="reset-button">
-                Reset
-              </button>
-            </div>
+      <div className="navbar-left">
+        <NavbarBS />
+        <div className="navbar-accept">
+          <h2>Accepted Documents:</h2>
+          <button onClick={handleReset} className="reset-button">
+            Reset
+          </button>
             <ul>
               {acceptedDocuments.map((document, index) => (
-                <li
-                  key={index}
-                  className={document.status === "Accepted" ? "bg-success" : "bg-danger"}
-                >
+                <li key={index}>
                   <p>Name: {document.file_name}</p>
                   <p>Status: {document.status}</p>
                 </li>
               ))}
             </ul>
-          </div>
         </div>
       </div>
 
