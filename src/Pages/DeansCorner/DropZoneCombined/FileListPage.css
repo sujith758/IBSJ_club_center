@@ -1,0 +1,87 @@
+.file-list-page {
+  background-color: #257878;
+  color: white;
+  height: 100vh;
+  width: 100%;
+  padding: 10px;
+}
+.file-list-page h2 {
+  text-align: center;
+  height: 60px;
+  margin-bottom: 0;
+  font-size: 3rem;
+}
+
+.file-list-content-ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.file-list-content-ul li {
+  padding: 30px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid white;
+}
+
+.file-name {
+  font-size: 1.5rem;
+  font-weight: 600;
+  /* color: #257878; */
+}
+
+.button-upload {
+  display: flex;
+  align-items: baseline;
+  gap: 30px;
+}
+
+.button-upload button {
+  /* padding: 10px; */
+  font-size: 1.1rem;
+  font-weight: 600;
+  border: none;
+  /* background-color: white; */
+  cursor: pointer;
+  width: 80px;
+  height: 40px;
+  text-align: center;
+  border-radius: 40px;
+}
+
+.view-button-dc{
+  color: #FF6F5B;
+}
+
+.accept-button-dc{
+  color: white;
+  background-color: #00BD5E;
+}
+
+.reject-button-dc{
+  color: white;
+  background-color: #FF4238;
+}
+
+.view-button-dc:hover,.accept-button-dc:hover,.reject-button-dc:hover{
+  transform: scale(1.2);
+}
+
+.view-button-dc,
+.accept-button-dc,
+.reject-button-dc {
+  transition: transform 0.3s ease; /* Added smooth scale transition */
+}
+
+.view-button-dc:hover,
+.accept-button-dc:hover,
+.reject-button-dc:hover {
+  transform: scale(1.1);
+}

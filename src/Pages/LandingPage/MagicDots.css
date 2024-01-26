@@ -1,0 +1,37 @@
+/* WaterDropGrid.css */
+.water-drop-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #257878;
+  padding: 2rem;
+}
+
+.custom-dot-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.custom-dot-group {
+  cursor: crosshair;
+  border-radius: 50%;
+  padding: 0.5rem;
+  transition: background-color 0.3s ease;
+}
+
+.custom-dot-group:hover {
+  background-color: #718096;
+}
+
+.custom-dot-point {
+  height: 5px;
+  width: 5px;
+  border-radius: 50%;
+  background: linear-gradient(to bottom, #000000, #0d0d0e);
+  opacity: 0.4;
+}
+
+.custom-dot-group:hover .custom-dot-point {
+  background: linear-gradient(to bottom, #ffffff, #ffffff);
+  opacity: 1;
+}

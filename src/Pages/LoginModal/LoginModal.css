@@ -1,0 +1,58 @@
+
+/* Modal styles */
+.modal {
+  display: none;
+  position: fixed;
+  top: 50%; /* Set top to 50% to center vertically */
+  left: 50%; /* Set left to 50% to center horizontally */
+  transform: translate(-50%, -50%); /* Center the modal both horizontally and vertically */
+  width: 100vw; /* Set width to cover the entire viewport width */
+  height: 100vh; /* Set height to cover the entire viewport height */
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(5px); /* Apply a blur effect to the background */
+}
+
+.modal.show {
+  display: flex;
+}
+
+.modal-content {
+  width: 40%;
+  height: 50%;
+  background-color: #257878;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow-y: auto; /* Allow vertical scrolling if content exceeds the modal height */
+}
+
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+/* Additional styling for the login prompt within the modal */
+.modal-content input {
+  width: 70%;
+  margin-bottom: 10px;
+  padding: 9px;
+  box-sizing: border-box;
+}
+
+.modal-content-login button {
+  background-color: white;
+  color: #257878;
+  border: none;
+  width: 90px;
+  height: 40px;
+  border-radius: 5px;
+  cursor: pointer;
+  border-radius: 30px;
+}
+

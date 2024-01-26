@@ -1,0 +1,73 @@
+.content-homepage {
+  height: calc(100vh - 60px);
+  width: 100%;
+  margin-bottom: 40px;
+  position: relative; /* Change from absolute to relative */
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.homepage_title {
+  padding-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  text-align: center;
+  position: relative; /* Add this line */
+}
+
+.homepage_title h1 {
+  margin-top: 10px;
+  font-size: 6.5rem;
+  font-weight: bold;
+  transform: scaleY(1.5);
+  letter-spacing: 16px;
+  height: 150px;
+  margin-bottom: 0;
+  background-image: url("../../public/enlarge_Mosaic_Pattern.jpg");
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0px 10px 10px rgba(0, 0, 0, 0.2);
+}
+
+.bodybottom-content {
+  width: 100%;
+  z-index: 2;
+  text-align: center;
+  position: relative; /* Add this line */
+}
+
+.bodybottom-content p {
+  color: #257878;
+  line-height: 1;
+  font-size: 2.2rem;
+}
+
+.floating-lottie {
+  z-index: -10;
+  position: absolute; /* Change from relative to absolute */
+  top: 0;
+  left: 150px;
+  width: 1000px;
+  height: 100vh;
+  opacity: 0.2;
+}
+
+.homepage__div h2{
+  letter-spacing: 3px;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 2px;
+  color:#257878;
+  text-align: center;
+  margin-top: 20px;
+  font-size: 5rem;
+  font-weight: bold;
+}

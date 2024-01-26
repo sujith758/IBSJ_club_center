@@ -1,0 +1,91 @@
+/* EventCalendar.css */
+
+/* .event_calendar {
+font-family: 'poppins';
+} */
+
+.custom-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1; /* Set z-index to 1 for the overlay */
+}
+
+.custom-modal {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  z-index: 2; /* Set z-index to 2 for the modal */
+}
+
+.custom-modal p {
+  margin-bottom: 10px;
+}
+
+.custom-modal input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+}
+
+.custom-modal button {
+  padding: 8px 16px;
+  margin: 0 8px;
+  cursor: pointer;
+}
+
+.custom-modal button:hover {
+  background: #f0f0f0;
+}
+
+/* Set a negative z-index for the calendar when the modal is open */
+.event_calendar.modal-open {
+  z-index: -1;
+}
+
+
+/* .event-content-container {
+  display: flex;
+  align-items: center;
+} */
+
+.event-title {
+  flex-grow: 1;
+  margin-right: 10px;
+}
+
+.event-delete-button,
+.event-update-button {
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+a.fc-col-header-cell-cushion {
+  text-decoration: none;
+  color: black;
+}
+
+a.fc-daygrid-day-number {
+  text-decoration: none;
+  color: black;
+}
+
+.fc-header-toolbar.fc-toolbar{
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  align-items: center;
+}
+
+.fc .fc-toolbar.fc-header-toolbar{
+  margin: 10px 0px;
+  /* padding: 5px 0px; */
+}
