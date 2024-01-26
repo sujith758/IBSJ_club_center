@@ -95,6 +95,7 @@ const LandingPage = () => {
       <div className="landing-page-logo">
         <img src="src/public/IBS_Jaipur_logo.png" alt="college logo" />
       </div>
+      
       <MagicDots className="magic-dots" />
 
       <div className="header-container">

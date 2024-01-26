@@ -16,7 +16,7 @@
   overflow: hidden;
   background-color: #fff;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  transition: width 0.5s ease; /* Add a transition for the width property */
+  transition: width 0.5s ease;  /*Add a transition for the width property */
   z-index: 1; /* Ensure the menu is above other content when opened */
 }
 
@@ -26,11 +26,18 @@
   padding: 20px;
 }
 
+/* shameera changes */
+.docs {
+  height: 4rem;
+  width: 13rem;
+  /* background-color: aqua; */
+}
+
 .menu-content h2 {
   font-size: 1.2rem;
   color: #257878;
   margin-left: 25px;
-  transition: margin-left 0.5s ease; /* Add a transition for the margin-left property */
+  transition: margin-left 0.5s ease;  /*Add a transition for the margin-left property */
 }
 
 .menu-content button {
@@ -68,12 +75,13 @@
   background-color: white;
   font-size: 24px;
   cursor: pointer;
-  transition: transform 0.5s ease; /* Add a transition for the transform property */
+  transition: transform 0.5s ease; /*Add a transition for the transform property */
   z-index: 3; /* Ensure the hamburger icon is above other content */
 }
 
+/*shameera changes*/
 .left-menu-container.menu-open .menu-left {
-  width: 30%;
+  width: 27%;
 }
 
 .left-menu-container.menu-open .hamburger-menu {
