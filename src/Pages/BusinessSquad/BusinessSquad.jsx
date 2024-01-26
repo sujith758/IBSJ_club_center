@@ -86,7 +86,8 @@ const BusinessSquad = ({ socketForFiles, sessionKey }) => {
         <div className="menu-left">
           <div className="menu-content">
             <div className="menu-header">
-              <h2>Document Status</h2>
+              <div className="docs"><h2>Document Status</h2></div>
+              {/* <h2>Document Status</h2> */}
               <button onClick={handleReset} className="reset-button">
                 Reset
               </button>

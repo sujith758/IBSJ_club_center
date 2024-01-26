@@ -76,10 +76,16 @@ const Homepage = () => {
         />
       </div>
       <div className="content-homepage">
-        <div className="homepage_title">
+        <div className="to-center">
+          <div className="homepage_title">
+            <h1>IBS JAIPUR</h1>
+            <h1>CLUB CENTER</h1>
+          </div>
+        </div>
+        {/* <div className="homepage_title">
           <h1>IBS JAIPUR</h1>
           <h1>CLUB CENTER</h1>
-        </div>
+        </div> */}
         <div className="bodybottom-content" ref={BodyBottomContentRef}>
           <p>WELCOME TO</p>
           <p>IBS JAIPUR CLUB CENTER</p>

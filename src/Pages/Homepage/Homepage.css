@@ -10,7 +10,16 @@
   justify-content: space-evenly;
 }
 
+.to-center {
+  width: 100%;
+  height: 340px;
+  /* background-color: aqua; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .homepage_title {
+  margin: auto;
   padding-top: 40px;
   display: flex;
   flex-direction: column;
@@ -38,6 +47,10 @@
   text-shadow: 0px 10px 10px rgba(0, 0, 0, 0.2);
 }
 
+.homepage_title h1 {
+  margin: auto;
+}
+
 .bodybottom-content {
   width: 100%;
   z-index: 2;
@@ -52,6 +65,9 @@
 }
 
 .floating-lottie {
+  /* margin-left: 90px;*/
+  margin-left: 10%;
+  /* margin-left: 5.625rem; */
   z-index: -10;
   position: absolute; /* Change from relative to absolute */
   top: 0;
