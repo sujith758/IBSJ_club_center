@@ -113,7 +113,12 @@ const BusinessSquad = ({ socketForFiles, sessionKey }) => {
           </div>
         </div>
       </div>
-      <div className="clubpage-body"></div>
+      <div className="clubpage-body">
+          
+
+
+
+      </div>
     </div>
   );
 };
