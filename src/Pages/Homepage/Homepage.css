@@ -68,20 +68,36 @@
 }
 
 .floating-lottie {
-  /* margin-left: 90px;*/
-  /* margin-left: 10%; */
-  /* margin-left: 5.625rem; */
+ display: flex;
+ justify-content: center;
+ align-items: center;
   z-index: -10;
   position: absolute; /* Change from relative to absolute */
-  top: 0;
-  left: 10%;
+  /* top: -10px; */
+  /* right: 10%; */
   width: 100%;
-  height: 10vh;
-  opacity: 0.5;
+  height: 100vh;
+  opacity: 0.4;
 }
 
 .shooting-star{
-  width: 600px;
+  /* float: right; */
+  width: 1000px;
+}
+.check-list{
+  z-index: -10;
+  position: absolute; 
+  width: 100%;
+  height: 1vh;
+  opacity: 0.8;
+  left: 10px;
+
+
+}
+.check-list-img{
+  
+  float: left;
+  width: 400px;
 }
 
 .homepage__div h2{
