@@ -2,6 +2,8 @@ import React, { useEffect, useRef} from "react";
 import gsap from "gsap";
 import JP from "../../public/WorldMapFinal.jpeg";
 import KP from "../../public/pin.png";
+import events_tag from "../../public/events_img.jpeg" 
+import collab from "../../public/collab.png"
 import "./Homepage.css";
 import ScrollMenu from "./ScrollMenu/ScrollMenu";
 import NavbarHP from "./Navbar/NavbarHP";
@@ -11,6 +13,8 @@ const Homepage = () => {
   const BodyBottomContentRef = useRef(null);
   const ContentHomepageContentRef = useRef(null);
   const PinPointRef = useRef(null);
+  const StickerRef = useRef(null);
+  const StickerTwoRef = useRef(null);
 
   useEffect(() => {
     // Add stagger to create a downward arrow animation
@@ -32,10 +36,13 @@ const Homepage = () => {
     gsap.set(BodyBottomContentRef.current.children, { opacity: 0 });
     gsap.set(ContentHomepageContentRef.current.children, { opacity: 0 });
     gsap.set(PinPointRef.current, { opacity: 0 });
+    gsap.set(StickerRef.current, { opacity: 0 });
+    gsap.set(StickerTwoRef.current, { opacity: 0 });
+
 
     // Animation for floating lottie
     gsap.from(".floating-lottie", {
-      opacity: 1,
+      opacity: 0,
       duration: 1.5,
       scale: 0.5,
       ease: "back.out(1.7)", // Popping motion
@@ -43,16 +50,16 @@ const Homepage = () => {
         gsap.from(".pin-point-img", {
           opacity: 0,
           scale: 0,
-          ease: "back.out(1.7)",
+          ease: "back.out(1.5)",
         });
         gsap.to(".pin-point-img", {
           opacity: 1,
           scale: 1,
-          ease: "back.out(1.7)",
+          ease: "back.out(1.5)",
         });
         // Animation to make the floating lottie disappear
         gsap.to(".floating-lottie", {
-          opacity: 0.2,
+          opacity: 0.5,
           duration: 0.5,
           ease: "power1.inOut",
           delay: 0.5, // Delay before content appears
@@ -75,6 +82,26 @@ const Homepage = () => {
               x: 0,
               opacity: 1,
               duration: 1.5,
+              onComplete: () => {
+                gsap.from(".check-list img",{
+                  opacity: 0,
+                  duration: 0.5,
+                })
+                gsap.to(".check-list img",{
+                  opacity: 1,
+                  duration: 0.5,
+                  ease: "power1.inOut",
+                })
+                gsap.from(".check-list-two img",{
+                  opacity: 0,
+                  duration: 0.5,
+                })
+                gsap.to(".check-list-two img",{
+                  opacity: 1,
+                  duration: 0.5,
+                  ease: "power1.inOut",
+                })
+              }
             });
           },
         });
@@ -108,12 +135,19 @@ const Homepage = () => {
               <h1>CLUB CENTER</h1>
             </div>
           </div>
+          <div className="check-list" >
+              <img src={events_tag} alt="" ref={StickerRef}/>
+            </div>
           <div className="bodybottom-content" ref={BodyBottomContentRef}>
             <p>WELCOME TO</p>
             <p>IBS JAIPUR CLUB CENTER</p>
             <p>FUN BEGINS HERE</p>
+            
             <div className="down-arrow">&#9660;</div>
           </div>
+          <div className="check-list-two">
+              <img src={collab} alt="" ref={StickerTwoRef}/>
+            </div>
         </div>
         <h2>CLUBS</h2>
         <ScrollMenu style={{ position: "relative" }} />

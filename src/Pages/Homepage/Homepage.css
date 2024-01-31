@@ -78,16 +78,16 @@
   width: 100%;
   height: 100vh;
   opacity: 0.4;
-  top: -120px;
+  top: -110px;
   left: 80px;
 }
 
 .pin-point-img {
   position: absolute;
-  width: 200px;
+  width: 100px;
   z-index: 1;
-  top: 150px;
-  left: 860px;
+  top: 35%;
+  left: 69%;
 }
 
 .shooting-star{
@@ -97,7 +97,7 @@
 
 .check-list{
   z-index: -10;
-  position: absolute; 
+  position: relative; 
   width: 100%;
   height: 1vh;
   opacity: 0.8;
@@ -105,11 +105,29 @@
 
 
 }
-.check-list-img{
-  
+.check-list img{
+  transform: rotate(-20deg);
   float: left;
-  width: 400px;
+  width: 300px;
 }
+
+
+.check-list-two{
+  z-index: -10;
+  position: relative; 
+  width: 100%;
+  height: 1vh;
+  opacity: 0.8;
+  top: -50%;
+  /* right: 10px; */
+
+
+}
+.check-list-two img{
+  float: right;
+  width: 300px;
+}
+
 
 .homepage__div h2{
   letter-spacing: 3px;
