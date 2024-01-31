@@ -1,6 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef} from "react";
 import gsap from "gsap";
-import JP from "../../public/WorldMapOutline.png";
+import JP from "../../public/WorldMapFinal.jpeg";
+import KP from "../../public/pin.png";
 import "./Homepage.css";
 import ScrollMenu from "./ScrollMenu/ScrollMenu";
 import NavbarHP from "./Navbar/NavbarHP";
@@ -9,6 +10,7 @@ import { motion as m } from "framer-motion";
 const Homepage = () => {
   const BodyBottomContentRef = useRef(null);
   const ContentHomepageContentRef = useRef(null);
+  const PinPointRef = useRef(null);
 
   useEffect(() => {
     // Add stagger to create a downward arrow animation
@@ -29,17 +31,28 @@ const Homepage = () => {
     // Set initial state for content
     gsap.set(BodyBottomContentRef.current.children, { opacity: 0 });
     gsap.set(ContentHomepageContentRef.current.children, { opacity: 0 });
+    gsap.set(PinPointRef.current, { opacity: 0 });
 
     // Animation for floating lottie
     gsap.from(".floating-lottie", {
-      opacity: 0,
+      opacity: 1,
       duration: 1.5,
       scale: 0.5,
       ease: "back.out(1.7)", // Popping motion
       onComplete: () => {
+        gsap.from(".pin-point-img", {
+          opacity: 0,
+          scale: 0,
+          ease: "back.out(1.7)",
+        });
+        gsap.to(".pin-point-img", {
+          opacity: 1,
+          scale: 1,
+          ease: "back.out(1.7)",
+        });
         // Animation to make the floating lottie disappear
         gsap.to(".floating-lottie", {
-          opacity: 0,
+          opacity: 0.2,
           duration: 0.5,
           ease: "power1.inOut",
           delay: 0.5, // Delay before content appears
@@ -77,7 +90,15 @@ const Homepage = () => {
     >
       <div className="homepage__div">
         <NavbarHP />
+
         <div className="floating-lottie">
+          <img
+            src={KP}
+            alt="pin-point-img"
+            className="pin-point-img"
+            ref={PinPointRef}
+          />
+
           <img src={JP} alt="IBS JAIPUR" className="shooting-star" />
         </div>
         <div className="content-homepage" ref={ContentHomepageContentRef}>
