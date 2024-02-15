@@ -36,8 +36,8 @@ const Homepage = () => {
     gsap.set(BodyBottomContentRef.current.children, { opacity: 0 });
     gsap.set(ContentHomepageContentRef.current.children, { opacity: 0 });
     gsap.set(PinPointRef.current, { opacity: 0 });
-    gsap.set(StickerRef.current, { opacity: 0 });
-    gsap.set(StickerTwoRef.current, { opacity: 0 });
+    // gsap.set(StickerRef.current, { opacity: 0 });
+    // gsap.set(StickerTwoRef.current, { opacity: 0 });
 
 
     // Animation for floating lottie
@@ -82,26 +82,26 @@ const Homepage = () => {
               x: 0,
               opacity: 1,
               duration: 1.5,
-              onComplete: () => {
-                gsap.from(".check-list img",{
-                  opacity: 0,
-                  duration: 0.5,
-                })
-                gsap.to(".check-list img",{
-                  opacity: 1,
-                  duration: 0.5,
-                  ease: "power1.inOut",
-                })
-                gsap.from(".check-list-two img",{
-                  opacity: 0,
-                  duration: 0.5,
-                })
-                gsap.to(".check-list-two img",{
-                  opacity: 1,
-                  duration: 0.5,
-                  ease: "power1.inOut",
-                })
-              }
+              // onComplete: () => {
+              //   gsap.from(".check-list img",{
+              //     opacity: 0,
+              //     duration: 0.5,
+              //   })
+              //   gsap.to(".check-list img",{
+              //     opacity: 1,
+              //     duration: 0.5,
+              //     ease: "power1.inOut",
+              //   })
+              //   gsap.from(".check-list-two img",{
+              //     opacity: 0,
+              //     duration: 0.5,
+              //   })
+              //   gsap.to(".check-list-two img",{
+              //     opacity: 1,
+              //     duration: 0.5,
+              //     ease: "power1.inOut",
+              //   })
+              // }
             });
           },
         });
@@ -117,7 +117,7 @@ const Homepage = () => {
     >
       <div className="homepage__div">
         <NavbarHP />
-
+        
         <div className="floating-lottie">
           <img
             src={KP}
@@ -135,9 +135,9 @@ const Homepage = () => {
               <h1>CLUB CENTER</h1>
             </div>
           </div>
-          <div className="check-list" >
+          {/* <div className="check-list" >
               <img src={events_tag} alt="" ref={StickerRef}/>
-            </div>
+            </div> */}
           <div className="bodybottom-content" ref={BodyBottomContentRef}>
             <p>WELCOME TO</p>
             <p>IBS JAIPUR CLUB CENTER</p>
@@ -145,9 +145,9 @@ const Homepage = () => {
             
             <div className="down-arrow">&#9660;</div>
           </div>
-          <div className="check-list-two">
+          {/* <div className="check-list-two">
               <img src={collab} alt="" ref={StickerTwoRef}/>
-            </div>
+            </div> */}
         </div>
         <h2>CLUBS</h2>
         <ScrollMenu style={{ position: "relative" }} />

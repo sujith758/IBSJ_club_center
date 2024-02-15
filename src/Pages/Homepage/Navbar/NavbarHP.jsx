@@ -15,7 +15,7 @@ const NavbarHP = () => {
 
   const handleLogin = () => {
     // Check if the username and password match (replace with your authentication logic)
-    if (username === "admin" && password === "admin#2003`") {
+    if (username === "admin" && password === "admin#2003") {
       setLoggedIn(true);
       setShowLoginModal(false);
       // Redirect to the desired path after successful login
