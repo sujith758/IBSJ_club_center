@@ -1,13 +1,13 @@
-import React, { useEffect, useRef} from "react";
+import React, { useEffect, useRef } from "react";
+import { motion as m } from "framer-motion";
 import gsap from "gsap";
 import JP from "../../public/WorldMapFinal.jpeg";
 import KP from "../../public/pin.png";
-import events_tag from "../../public/events_img.jpeg" 
-import collab from "../../public/collab.png"
+import events_tag from "../../public/events_img.png";
+import collab from "../../public/collab.png";
 import "./Homepage.css";
 import ScrollMenu from "./ScrollMenu/ScrollMenu";
 import NavbarHP from "./Navbar/NavbarHP";
-import { motion as m } from "framer-motion";
 
 const Homepage = () => {
   const BodyBottomContentRef = useRef(null);
@@ -36,9 +36,8 @@ const Homepage = () => {
     gsap.set(BodyBottomContentRef.current.children, { opacity: 0 });
     gsap.set(ContentHomepageContentRef.current.children, { opacity: 0 });
     gsap.set(PinPointRef.current, { opacity: 0 });
-    // gsap.set(StickerRef.current, { opacity: 0 });
-    // gsap.set(StickerTwoRef.current, { opacity: 0 });
-
+    gsap.set(StickerRef.current, { opacity: 0 });
+    gsap.set(StickerTwoRef.current, { opacity: 0 });
 
     // Animation for floating lottie
     gsap.from(".floating-lottie", {
@@ -59,7 +58,7 @@ const Homepage = () => {
         });
         // Animation to make the floating lottie disappear
         gsap.to(".floating-lottie", {
-          opacity: 0.5,
+          opacity: 0.3,
           duration: 0.5,
           ease: "power1.inOut",
           delay: 0.5, // Delay before content appears
@@ -82,26 +81,26 @@ const Homepage = () => {
               x: 0,
               opacity: 1,
               duration: 1.5,
-              // onComplete: () => {
-              //   gsap.from(".check-list img",{
-              //     opacity: 0,
-              //     duration: 0.5,
-              //   })
-              //   gsap.to(".check-list img",{
-              //     opacity: 1,
-              //     duration: 0.5,
-              //     ease: "power1.inOut",
-              //   })
-              //   gsap.from(".check-list-two img",{
-              //     opacity: 0,
-              //     duration: 0.5,
-              //   })
-              //   gsap.to(".check-list-two img",{
-              //     opacity: 1,
-              //     duration: 0.5,
-              //     ease: "power1.inOut",
-              //   })
-              // }
+              onComplete: () => {
+                gsap.from(".check-list img", {
+                  opacity: 0,
+                  duration: 0.5,
+                });
+                gsap.to(".check-list img", {
+                  opacity: 1,
+                  duration: 0.5,
+                  ease: "power1.inOut",
+                });
+                gsap.from(".check-list-two img", {
+                  opacity: 0,
+                  duration: 0.5,
+                });
+                gsap.to(".check-list-two img", {
+                  opacity: 1,
+                  duration: 0.5,
+                  ease: "power1.inOut",
+                });
+              },
             });
           },
         });
@@ -117,7 +116,6 @@ const Homepage = () => {
     >
       <div className="homepage__div">
         <NavbarHP />
-        
         <div className="floating-lottie">
           <img
             src={KP}
@@ -125,7 +123,6 @@ const Homepage = () => {
             className="pin-point-img"
             ref={PinPointRef}
           />
-
           <img src={JP} alt="IBS JAIPUR" className="shooting-star" />
         </div>
         <div className="content-homepage" ref={ContentHomepageContentRef}>
@@ -135,19 +132,18 @@ const Homepage = () => {
               <h1>CLUB CENTER</h1>
             </div>
           </div>
-          {/* <div className="check-list" >
-              <img src={events_tag} alt="" ref={StickerRef}/>
-            </div> */}
+          <div className="check-list">
+            <img src={events_tag} alt="" ref={StickerRef} />
+          </div>
           <div className="bodybottom-content" ref={BodyBottomContentRef}>
             <p>WELCOME TO</p>
             <p>IBS JAIPUR CLUB CENTER</p>
             <p>FUN BEGINS HERE</p>
-            
             <div className="down-arrow">&#9660;</div>
           </div>
-          {/* <div className="check-list-two">
-              <img src={collab} alt="" ref={StickerTwoRef}/>
-            </div> */}
+          <div className="check-list-two">
+            <img src={collab} alt="" ref={StickerTwoRef} />
+          </div>
         </div>
         <h2>CLUBS</h2>
         <ScrollMenu style={{ position: "relative" }} />
